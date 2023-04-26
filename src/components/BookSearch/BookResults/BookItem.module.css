@@ -1,0 +1,92 @@
+
+.single-book {
+  background: var(--clr-background-light);
+  margin: 2rem 0;
+  box-shadow: var(--light-shadow);
+  transition: var(--transition);
+  padding-bottom: 1rem;
+  border-radius: 20px 20px 3px 3px ;
+}
+.single-book:hover {
+  box-shadow: var(--dark-shadow);
+}
+
+.single-book__content {
+  height: 7rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-top: 1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+
+.single-book__image img {
+  width: 100%;
+  border-radius: 20px 20px 0 0 ;
+  height: 25rem;
+  object-fit: cover;
+}
+.book-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+.book-info h4 {
+  margin-bottom: 0;
+}
+.single-book__btn {
+  display: block;
+  position: relative;
+  width: 8rem;
+  text-align: center;
+  background: transparent;
+  border: none;
+  color: var(--clr-text);
+  font-size: 13px;
+  cursor: pointer;
+  padding: 0.50rem;
+  align-self: flex-end;
+}
+.single-book__btns {
+  display: flex;
+  justify-content: space-between;
+}
+
+.single-book__btn svg {
+  height: 32px;
+  left: 0;
+  position: absolute;
+  top: 0; 
+  width: 100%; 
+}
+
+.single-book__btn svg rect {
+  fill: none;
+  stroke: var(--clr-text);
+  stroke-width: 2;
+  stroke-dasharray: 422, 0;
+  transition: all 0.35s linear;
+}
+
+.single-book__btn:hover {
+  font-weight: 600;
+}
+
+.single-book__btn:hover svg rect {
+  stroke-width: 5;
+  stroke-dasharray: 15, 310;
+  stroke-dashoffset: 48;
+  transition: all 1.35s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.single-book__text {
+  text-align: center;
+}
+
+.single-book__text span:first-child {
+  font-weight: bold;
+}
+

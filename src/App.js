@@ -1,24 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import BookSearch from "./components/BookSearch/BookSearch";
+import SharedLayout from "./components/SharedLayout/SharedLayout";
+import BookshelfLayout from "./components/SharedLayout/BookshelfLayout";
+import Profile from "./components/Profile/Profile";
+import InProgress from "./components/Bookshelf/InProgress/InProgress";
+import Completed from "./components/Bookshelf/Completed/Completed";
+import ToRead from "./components/Bookshelf/ToRead/ToRead";
 
 function App() {
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<SharedLayout />}>
+          <Route index element={<BookSearch />} />
+          <Route path='bookshelf' element={<BookshelfLayout />}>
+            <Route index element={<ToRead />} />
+            <Route path='inprogress' element={<InProgress />} />
+            <Route path='completed' element={<Completed />} />
+          </Route>
+          <Route path='profile' element={<Profile />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
