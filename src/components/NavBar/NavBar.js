@@ -13,12 +13,15 @@ import {
 import { NavLink } from "react-router-dom";
 import bookshelf from "../../images/bookshelfsimple.png";
 import { useState } from "react";
+import { useAuth } from "../../context/AuthContext";
 
 export default function NavBar() {
   const theme = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up("md"));
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
+
+  const { currentUser } = useAuth();
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -27,6 +30,8 @@ export default function NavBar() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const toValue = currentUser ? '/profile' : '/signin';
 
   return (
     <Box>
@@ -135,7 +140,7 @@ export default function NavBar() {
 
             <MenuItem key={"profile"}>
               <NavLink
-                to="/profile"
+                to={toValue}
                 className={({ isActive }) =>
                   isActive ? "link active" : "link"
                 }

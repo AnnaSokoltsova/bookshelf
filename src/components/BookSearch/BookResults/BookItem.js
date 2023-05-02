@@ -2,12 +2,21 @@ import classes from "./BookItem.module.css";
 import { useDispatch } from 'react-redux';
 import { toReadActions } from "../../../store/book-shelf-to-read";
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from "../../../context/AuthContext";
+
 
 export default function BookItem({ id, author, title, coverImg }) {
   const dispatch = useDispatch();
   const navigate = useNavigate(); 
 
+  const { currentUser } = useAuth();
+
   const handleClick = () => {
+    if (!currentUser) {
+      navigate('/signin');
+      return;
+    }
+
     dispatch(toReadActions.addBookToShelf({
       id,
       author,
