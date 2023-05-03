@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 
-import BookItem from "./BookItem";
+import BookItem from "../../BookItem/BookItem";
+import BookResultButton from "./BookResultButton";
 import missingCover from "../../../images/missingcover.png";
 import classes from "./BookResults.module.css";
 
@@ -29,11 +30,17 @@ export default function BookResults() {
           {booksWithCovers.map((book) => (
             <BookItem
               key={book.id}
-              id={book.id}
               author={book.author}
               title={book.title}
               coverImg={book.cover_img}
-            />
+            >
+              <BookResultButton
+                author={book.author}
+                id={book.id}
+                title={book.title}
+                coverImg={book.cover_img}
+              />
+            </BookItem>
           ))}
         </div>
       )}

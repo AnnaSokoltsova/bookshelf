@@ -112,7 +112,7 @@ export default function NavBar() {
                     isActive ? "link active" : "link"
                   }
                 >
-                  To be read
+                  Favorites
                 </NavLink>
               </MenuItem>
               <MenuItem onClick={handleClose}>

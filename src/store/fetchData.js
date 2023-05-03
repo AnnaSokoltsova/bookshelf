@@ -1,4 +1,4 @@
-import { bookSearchActions } from "./book-search";
+import { bookSearchActions } from "./book-search-slice";
 let firstRender = true;
 
 export const fetchBooksData = (searchedBookName) => {
