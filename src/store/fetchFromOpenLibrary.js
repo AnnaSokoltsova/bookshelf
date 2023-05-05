@@ -26,8 +26,9 @@ export const fetchBooksData = (searchedBookName) => {
       if (docs) {
         const newBooks = docs.slice(0, 20).map((bookSingle) => {
           const { key, author_name, cover_i, title } = bookSingle;
+          const newId = key.substring(7);
           return {
-            id: key,
+            id: newId,
             author: author_name || ['Unknown'],
             cover_id: cover_i,
             title: title,

@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { bookshelfActions } from "../../../store/bookshelf-slice";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../context/AuthContext";
+import { sendBookshelfData } from "../../../store/bookshelf-actions";
 
 export default function BookResultButton({ id, author, title, coverImg }) {
   const dispatch = useDispatch();
@@ -24,7 +25,11 @@ export default function BookResultButton({ id, author, title, coverImg }) {
         coverImg,
       })
     );
+
     navigate("/bookshelf");
+
+    const userId = currentUser.uid;
+    dispatch(sendBookshelfData(id, author, title, coverImg, userId));
   };
 
   return (

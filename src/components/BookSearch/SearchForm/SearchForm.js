@@ -2,7 +2,7 @@ import { useRef, useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { bookSearchActions } from "../../../store/book-search-slice";
 import classes from "./SearchForm.module.css";
-import { fetchBooksData } from "../../../store/fetchData";
+import { fetchBooksData } from "../../../store/fetchFromOpenLibrary";
 
 function SearchForm(props) {
   const [searchText, setSearchText] = useState("");
