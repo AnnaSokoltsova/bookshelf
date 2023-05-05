@@ -9,7 +9,6 @@ export default function Profile() {
   const [error, setError] = useState("")
   const { currentUser, logout, loading } = useAuth();
   const navigate = useNavigate();
-
   async function handleLogout() {
     setError("")
     try {

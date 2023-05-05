@@ -2,19 +2,33 @@ import classes from "../../BookItem/BookItem.module.css";
 import { useDispatch } from "react-redux";
 import { bookshelfActions } from "../../../store/bookshelf-slice";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../../context/AuthContext";
+import { updateBookStatus } from "../../../store/bookshelf-actions";
+import { removeBook } from "../../../store/bookshelf-actions";
 
 export default function FavoriteButtons({ id }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { currentUser } = useAuth();
+  const userId = currentUser.uid;
 
   const handleRemove = () => {
     console.log(id);
     dispatch(bookshelfActions.removeFromBookShelf(id));
+
+    dispatch(removeBook(id, userId))
   };
 
   const handleClick = () => {
     dispatch(bookshelfActions.startReading(id));
     navigate("/bookshelf/inprogress");
+
+    
+    const bookStatuses = {
+      inProgressStatus : true,
+      isFavorite : false,
+    }
+    dispatch(updateBookStatus(id, userId, bookStatuses));
   };
 
   return (

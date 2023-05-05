@@ -7,25 +7,25 @@ import duneMessiah from '../images/covers/dunemessiah.jpeg';
 const initialState = {
   bookResults: [
     {
-      id: 1,
+      id: "The Hobbit",
       author: ["J.R.R. Tolkien"],
       cover_img: theHobbit,
       title: "The Hobbit",
     },
     {
-      id: 2,
+      id: "The Great Gatsby",
       author: ["F. Scott Fitzgerald"],
       cover_img: greatGatsby,
       title: "The Great Gatsby",
     },
     {
-      id: 3,
+      id: "Harry Potter and the Prisoner of Azkaban",
       author: ["J. K. Rowling"],
       cover_img: harryPotter,
       title: "Harry Potter and the Prisoner of Azkaban",
     },
     {
-      id: 4,
+      id: "Dune Messiah",
       author: ["Frank Herbert"],
       cover_img: duneMessiah,
       title: "Dune Messiah",

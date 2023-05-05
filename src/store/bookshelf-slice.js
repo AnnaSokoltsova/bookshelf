@@ -11,6 +11,9 @@ const bookshelfSlice = createSlice({
   name: "bookshelf",
   initialState,
   reducers: {
+    replaceBookshelf(state, action) {
+      state.books = action.payload
+    },
     addBookToShelf(state, action) {
       const newBook = action.payload;
       const existingBook = state.books.find((book) => book.id === newBook.id);
