@@ -23,6 +23,7 @@ const bookshelfSlice = createSlice({
           author: newBook.author,
           title: newBook.title,
           coverImg: newBook.coverImg,
+          comments: [],
           isFavorite: true,
           inProgressStatus: false,
           completedStatus: false,
@@ -55,6 +56,12 @@ const bookshelfSlice = createSlice({
       finishedBook.inProgressStatus = false;
       finishedBook.completedStatus = true;
     },
+    addComment(state, action) {
+      const id = action.payload.id;
+      const comment = action.payload.comment;
+      const reviewedBook = state.books.find((book) => book.id === id);
+      reviewedBook.comments.push(comment)
+    }
   },
 });
 

@@ -4,6 +4,7 @@ import BookItemAdded from "../../BookItem/BookItemAdded";
 import FavoriteButtons from "./FavoriteButtons";
 import Container from "../../Container/Container";
 
+
 export default function Favorites() {
   const bookItems = useSelector((state) => state.bookshelf.books);
 
@@ -17,6 +18,7 @@ export default function Favorites() {
         {favoriteBooks.map((book) => (
           <BookItemAdded
             key={book.id}
+            id={book.id}
             author={book.author}
             title={book.title}
             coverImg={book.coverImg}
