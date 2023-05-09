@@ -1,0 +1,13 @@
+.book-page {
+  display: flex;
+}
+
+.book-page__image {
+  border-radius: 15px;
+  max-width: 100%;
+  
+}
+
+.book-page__text-container {
+  margin-left: 2rem;
+}

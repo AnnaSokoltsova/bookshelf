@@ -1,9 +1,9 @@
-import React from "react";
+
 import classes from "./BookItem.module.css";
 import { Link } from "react-router-dom";
 import missingCover from "../../images/missingcover.png";
 
-export default function BookItem({ children, id, author, title, coverImg }) {
+export default function BookItemAdded({ children, id, author, title, coverImg }) {
 
   const replaceImageOnError = (event) => {
     event.currentTarget.src = missingCover;

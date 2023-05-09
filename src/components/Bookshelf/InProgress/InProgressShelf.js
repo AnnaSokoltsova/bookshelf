@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import classes from "../../BookSearch/BookResults/BookResults.module.css";
-import BookItem from "../../BookItem/BookItem";
+import BookItemAdded from "../../BookItem/BookItemAdded";
 import InProgressButtons from "./InProgressButtons";
 import Container from "../../Container/Container";
 
@@ -17,14 +17,14 @@ export default function InProgress() {
           <h3>You are not reading books currently </h3>
         )}
         {booksInProgress.map((book) => (
-          <BookItem
+          <BookItemAdded
             key={book.id}
             author={book.author}
             title={book.title}
             coverImg={book.coverImg}
           >
             <InProgressButtons id={book.id} />
-          </BookItem>
+          </BookItemAdded>
         ))}
       </div>
     </Container>

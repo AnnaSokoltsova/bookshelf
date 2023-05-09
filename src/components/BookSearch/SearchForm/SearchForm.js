@@ -4,11 +4,13 @@ import { bookSearchActions } from "../../../store/book-search-slice";
 import classes from "./SearchForm.module.css";
 import { fetchBooksData } from "../../../store/fetchFromOpenLibrary";
 
+let isMounted = false;
+
 function SearchForm(props) {
   const [searchText, setSearchText] = useState("");
   const [searchInput, setSearchInput] = useState("");
   const dispatch = useDispatch();
-  const [isMounted, setIsMounted] = useState(false);
+  
 
   // useEffect(() => searchText.current.focus(), []);
   useEffect(() => {
@@ -17,9 +19,11 @@ function SearchForm(props) {
         dispatch(fetchBooksData(searchText));
       }
     } else {
-      setIsMounted(true);
+      console.log(isMounted);
+      dispatch(fetchBooksData("Little Women Louisa May Alcott"));
+      isMounted = true;
     }
-  }, [searchText, dispatch, isMounted]);
+  }, [searchText, dispatch]);
 
   const handleSubmit = (e) => {
     e.preventDefault();

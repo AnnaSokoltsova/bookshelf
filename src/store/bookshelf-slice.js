@@ -54,7 +54,7 @@ const bookshelfSlice = createSlice({
       const finishedBook = state.books.find((book) => book.id === id);
       finishedBook.inProgressStatus = false;
       finishedBook.completedStatus = true;
-    }
+    },
   },
 });
 

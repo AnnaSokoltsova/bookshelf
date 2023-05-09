@@ -2,7 +2,6 @@ import { useSelector } from "react-redux";
 
 import BookItem from "../../BookItem/BookItem";
 import BookResultButton from "./BookResultButton";
-import missingCover from "../../../images/missingcover.png";
 import classes from "./BookResults.module.css";
 
 export default function BookResults() {
@@ -10,35 +9,25 @@ export default function BookResults() {
   const loadingStatus = useSelector((state) => state.bookSearch.isLoading);
   const searchTitle = useSelector((state) => state.bookSearch.searchTitle);
 
-  const booksWithCovers = bookResults.map((bookInstance) => {
-    return {
-      ...bookInstance,
-      cover_img: bookInstance.cover_id
-        ? `https://covers.openlibrary.org/b/id/${bookInstance.cover_id}-L.jpg`
-        : bookInstance.cover_img
-        ? bookInstance.cover_img
-        : missingCover,
-    };
-  });
-
   return (
     <div>
       <p>{searchTitle}</p>
       {loadingStatus && <p>Loading...</p>}
       {!loadingStatus && (
         <div className={classes["book-container"]}>
-          {booksWithCovers.map((book) => (
+          {bookResults.map((book) => (
             <BookItem
               key={book.id}
+              id={book.id}
               author={book.author}
               title={book.title}
-              coverImg={book.cover_img}
+              coverImg={book.coverImg}
             >
               <BookResultButton
                 author={book.author}
                 id={book.id}
                 title={book.title}
-                coverImg={book.cover_img}
+                coverImg={book.coverImg}
               />
             </BookItem>
           ))}
