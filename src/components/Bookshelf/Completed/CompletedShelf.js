@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import classes from "../../BookSearch/BookResults/BookResults.module.css";
-import BookItem from "../../BookItem/BookItem";
+import BookItemAdded from "../../BookItem/BookItemAdded";
 import Container from "../../Container/Container";
 
 export default function CompletedShelf() {
@@ -16,12 +16,12 @@ export default function CompletedShelf() {
           <h3>You have not finished reading a book yet </h3>
         )}
         {completedBooks.map((book) => (
-          <BookItem
+          <BookItemAdded
             key={book.id}
             author={book.author}
             title={book.title}
             coverImg={book.coverImg}
-          ></BookItem>
+          ></BookItemAdded>
         ))}
       </div>
     </Container>
