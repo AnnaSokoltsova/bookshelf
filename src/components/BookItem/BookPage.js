@@ -7,7 +7,7 @@ import { fetchWorksData } from "../../store/fetchFromOpenLibrary";
 import { useDispatch } from "react-redux";
 import missingCover from "../../images/missingcover.png";
 
-export default function BookPage() {
+export default function BookPage({children}) {
   const { pageid } = useParams();
   const dispatch = useDispatch();
   const bookPage = useSelector((state) => state.bookpage.bookpage);
@@ -53,7 +53,7 @@ export default function BookPage() {
           </div>
         </div>
       </div>}
-      
+      {children}
     </Container>
   );
 }

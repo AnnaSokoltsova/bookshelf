@@ -8,7 +8,7 @@ export default function BookItemAdded({ children, id, author, title, coverImg })
   const replaceImageOnError = (event) => {
     event.currentTarget.src = missingCover;
   };
-
+  console.log(id);
   return (
     <article className={classes["single-book"]}>
       <div className={classes["single-book__image"]}>
@@ -20,7 +20,7 @@ export default function BookItemAdded({ children, id, author, title, coverImg })
             <span>Author: {author.join(", ")}</span>
           </div>
           <div className={classes["single-book__text"]}>
-            <Link to={`/${id}`}><span>Title: {title}</span></Link>
+            <Link to={`/bookshelf/${id}`}><span>Title: {title}</span></Link>
           </div>
         </div>
         {children}

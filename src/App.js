@@ -10,6 +10,8 @@ import Favorites from "./components/Bookshelf/ToRead/FavoritesShelf";
 import SignIn from "./components/Profile/SignIn";
 import SignUp from "./components/Profile/SignUp";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
+import CommentsForm from "./components/Comments/CommentsForm";
+import Comments from "./components/Comments/Comments";
 import { useEffect } from "react";
 import { useAuth } from "./context/AuthContext";
 import { fetchBookshelfData } from "./store/bookshelf-actions";
@@ -43,7 +45,7 @@ function App() {
             <Route index element={<Favorites />} />
             <Route path="inprogress" element={<InProgress />} />
             <Route path="completed" element={<Completed />} />
-            <Route path=':pageid' element={<BookPage/>} />
+            <Route path=':pageid' element={<BookPage><CommentsForm/><Comments/></BookPage>} />
           </Route>
           <Route path="signup" element={<SignUp />} />
           <Route path="signin" element={<SignIn />} />
