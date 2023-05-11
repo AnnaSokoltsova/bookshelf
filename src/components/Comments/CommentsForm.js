@@ -4,12 +4,15 @@ import { bookshelfActions } from "../../store/bookshelf-slice";
 import classes from "./Comments.module.css";
 import { useParams } from "react-router-dom";
 
+
+
 export default function CommentsForm() {
   const [labelText, setLabelText] = useState("Leave your comments:");
   const [textAreaComment, setTextAreaComment] = useState("");
   const dispatch = useDispatch();
   const postTextAreaId = useId();
   const { pageid } = useParams();
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -26,7 +29,7 @@ export default function CommentsForm() {
   return (
     <div className={classes["comments-container"]}>
       <form className={classes["comments-form"]} onSubmit={handleSubmit}>
-        <label htmlFor={postTextAreaId}>
+        <label htmlFor={postTextAreaId} className={classes["comments-textarea"]}>
           {labelText}
           <textarea
             id={postTextAreaId}
