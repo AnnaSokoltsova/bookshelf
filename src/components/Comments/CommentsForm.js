@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { bookshelfActions } from "../../store/bookshelf-slice";
 import classes from "./Comments.module.css";
 import { useParams } from "react-router-dom";
-
+import { v4 as uuidv4 } from "uuid";
 
 
 export default function CommentsForm() {
@@ -20,7 +20,8 @@ export default function CommentsForm() {
     if (userComment.replace(/[^\w\s]/gi, "").length === 0) {
       setLabelText('Your comment can\'t be empty');
     } else {
-      dispatch(bookshelfActions.addComment({id: pageid, comment: userComment}));
+      const commentId = uuidv4()
+      dispatch(bookshelfActions.addComment({pageid, commentId, comment: userComment}));
       setLabelText('Leave your comments:')
       setTextAreaComment('');
     }

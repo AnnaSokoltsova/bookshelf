@@ -57,10 +57,17 @@ const bookshelfSlice = createSlice({
       finishedBook.completedStatus = true;
     },
     addComment(state, action) {
-      const id = action.payload.id;
+      const commentId = action.payload.commentId;
+      const pageId = action.payload.pageid;
       const comment = action.payload.comment;
-      const reviewedBook = state.books.find((book) => book.id === id);
-      reviewedBook.comments.unshift(comment)
+      const reviewedBook = state.books.find((book) => book.id === pageId);
+      reviewedBook.comments.unshift({commentId, text: comment})
+    },
+    removeComment(state, action) {
+      const id = action.payload.id;
+      const pageId = action.payload.pageid;
+      const reviewedBook = state.books.find((book) => book.id === pageId);
+      reviewedBook.comments = reviewedBook.comments.filter((comment) => comment.commentId !== id);
     }
   },
 });

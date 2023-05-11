@@ -2,10 +2,11 @@ import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { v4 as uuidv4 } from "uuid";
+
 import classes from "./Comments.module.css";
 import { addComment } from "../../store/bookshelf-actions";
 import { useAuth } from "../../context/AuthContext";
+import Comment from "./Comment";
 
 export default function Comments() {
   const { pageid } = useParams();
@@ -22,17 +23,18 @@ export default function Comments() {
     dispatch(addComment(pageid, userId, userComments));
   }, [reviewdBook.comments, dispatch, pageid, userId]);
 
-  let date = new Date().toLocaleDateString();
-
-
   return (
     <div className={classes["single-comments_container"]}>
-      {reviewdBook.comments.map((comment) => (
-        <p key={uuidv4()} className={classes["single-comment"]}>
-          {comment}
-          <p className={classes["single-comment__date"]}>{date}</p>
-        </p>
-      ))}
+      {reviewdBook.comments.map((comment) => {
+        return (
+          <Comment
+            key={comment.commentId}
+            id={comment.commentId}
+            comment={comment.text}
+            pageid={pageid}
+          />
+        );
+      })}
     </div>
   );
 }
