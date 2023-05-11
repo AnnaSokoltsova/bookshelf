@@ -99,7 +99,7 @@ export const addComment = (id, userId, comments) => {
         const userCollectionRef = collection(db, `books ${userId}`);
         const bookRef = doc(userCollectionRef, id);
         await updateDoc(bookRef, comments);
-        console.log('comment added');
+        console.log('comments sent to firebase');
       } catch (error) {
         console.log(error.message);
         dispatch(
