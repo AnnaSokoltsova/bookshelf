@@ -22,11 +22,15 @@ export default function Comments() {
     dispatch(addComment(pageid, userId, userComments));
   }, [reviewdBook.comments, dispatch, pageid, userId]);
 
+  let date = new Date().toLocaleDateString();
+
+
   return (
     <div className={classes["single-comments_container"]}>
       {reviewdBook.comments.map((comment) => (
         <p key={uuidv4()} className={classes["single-comment"]}>
           {comment}
+          <p className={classes["single-comment__date"]}>{date}</p>
         </p>
       ))}
     </div>

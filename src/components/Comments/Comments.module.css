@@ -31,11 +31,16 @@
 }
 
 .single-comment {
+  display: inline-block;
   background: var(--clr-background-light);
-  margin: 2rem 0;
+  margin: 1rem 0;
   box-shadow: var(--light-shadow);
-  padding: 1rem;
+  padding: 0.8rem;
   border-radius: 10px ;
+}
+
+.single-comment__date {
+  font-size: 10px;
 }
 
 @media only screen and (max-width: 768px) {
