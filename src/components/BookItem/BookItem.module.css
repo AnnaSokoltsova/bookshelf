@@ -1,5 +1,6 @@
 
 .single-book {
+  position: relative;
   background: var(--clr-background-light);
   margin: 2rem 0;
   box-shadow: var(--light-shadow);
@@ -37,6 +38,10 @@
 .book-info h4 {
   margin-bottom: 0;
 }
+
+.single-book__btns {
+  align-self: flex-end;
+}
 .single-book__btn {
   display: block;
   position: relative;
@@ -50,10 +55,7 @@
   padding: 0.50rem;
   align-self: flex-end;
 }
-.single-book__btns {
-  display: flex;
-  justify-content: space-between;
-}
+
 
 .single-book__btn svg {
   height: 32px;
@@ -80,6 +82,65 @@
   stroke-dasharray: 15, 310;
   stroke-dashoffset: 48;
   transition: all 1.35s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.single-book__btn-close{
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(40%, -40%);
+  margin: 0;
+  padding: 0;
+  background: hsl(0, 0%, 94%);
+  border-radius: 50%;
+  border: 1px solid var(--clr-text);
+  width: 30px;
+  height: 30px;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 150ms;
+}
+
+.single-book__btn-close:hover,
+.single-book__btn-close:focus {
+    background: hsl(0, 2%, 88%);
+  }
+
+.single-book__icon-cross{
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  position: relative;
+  width: 20px;
+  height: 20px;
+}
+
+.single-book__icon-cross:before,
+.single-book__icon-cross:after {
+  content: '';
+  position: absolute;
+  top: 9px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--clr-text);
+  border-radius: 6px;
+}
+
+.single-book__icon-cross:before {
+  transform: rotate(45deg);
+}
+
+.single-book__icon-cross:after {
+  transform: rotate(-45deg);
+}
+
+.single-book__btn-close span {
+  display: block;
 }
 
 .single-book__text {

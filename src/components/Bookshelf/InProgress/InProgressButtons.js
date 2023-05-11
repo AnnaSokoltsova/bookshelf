@@ -15,9 +15,9 @@ export default function InProgressButtons({ id }) {
   const handleRemove = () => {
     dispatch(bookshelfActions.stopReading(id));
     const bookStatuses = {
-      inProgressStatus : false,
-      isFavorite : true
-    }
+      inProgressStatus: false,
+      isFavorite: true,
+    };
     dispatch(updateBookStatus(id, userId, bookStatuses));
   };
 
@@ -26,19 +26,20 @@ export default function InProgressButtons({ id }) {
     navigate("/bookshelf/completed");
 
     const bookStatuses = {
-      inProgressStatus : false,
-      completedStatus : true
-    }
+      inProgressStatus: false,
+      completedStatus: true,
+    };
     dispatch(updateBookStatus(id, userId, bookStatuses));
   };
 
   return (
     <div className={classes["single-book__btns"]}>
-      <button className={classes["single-book__btn"]} onClick={handleRemove}>
-        <svg>
-          <rect x="0" y="0" fill="none" width="100%" height="100%" />
-        </svg>
-        Remove
+      <button
+        type="button"
+        className={classes["single-book__btn-close"]}
+        onClick={handleRemove}
+      >
+        <span className={classes["single-book__icon-cross"]}></span>
       </button>
 
       <button className={classes["single-book__btn"]} onClick={handleClick}>
