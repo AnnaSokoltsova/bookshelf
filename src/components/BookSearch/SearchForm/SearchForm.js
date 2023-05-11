@@ -20,7 +20,7 @@ function SearchForm(props) {
       }
     } else {
       console.log(isMounted);
-      dispatch(fetchBooksData("Little Women Louisa May Alcott"));
+      dispatch(fetchBooksData("The Hobbit"));
       isMounted = true;
     }
   }, [searchText, dispatch]);

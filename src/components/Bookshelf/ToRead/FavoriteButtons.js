@@ -16,30 +16,25 @@ export default function FavoriteButtons({ id }) {
     console.log(id);
     dispatch(bookshelfActions.removeFromBookShelf(id));
 
-    dispatch(removeBook(id, userId))
+    dispatch(removeBook(id, userId));
   };
 
   const handleClick = () => {
     dispatch(bookshelfActions.startReading(id));
     navigate("/bookshelf/inprogress");
 
-    
     const bookStatuses = {
-      inProgressStatus : true,
-      isFavorite : false,
-    }
+      inProgressStatus: true,
+      isFavorite: false,
+    };
     dispatch(updateBookStatus(id, userId, bookStatuses));
   };
 
   return (
     <div className={classes["single-book__btns"]}>
-      <button className={classes["single-book__btn"]} onClick={handleRemove}>
-        <svg>
-          <rect x="0" y="0" fill="none" width="100%" height="100%" />
-        </svg>
-        Remove
+      <button type="button" className={classes["single-book__btn-close"]} onClick={handleRemove}>
+        <span className={classes["single-book__icon-cross"]}></span>
       </button>
-
       <button className={classes["single-book__btn"]} onClick={handleClick}>
         <svg>
           <rect x="0" y="0" fill="none" width="100%" height="100%" />

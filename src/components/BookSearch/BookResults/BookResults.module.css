@@ -11,9 +11,16 @@
   }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 650px) {
   .book-container {
     grid-template-columns: repeat(2, 1fr);
+    column-gap: 20px;
+  }
+}
+
+@media (min-width: 1000px) {
+  .book-container {
+    grid-template-columns: repeat(3, 1fr);
     column-gap: 20px;
   }
 }
