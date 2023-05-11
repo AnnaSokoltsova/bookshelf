@@ -6,7 +6,7 @@ export const fetchBooksData = (searchedBook) => {
   return async (dispatch) => {
     const fetchData = async () => {
       const response = await fetch(
-        `http://openlibrary.org/search.json?q=${searchedBook}`
+        `http://openlibrary.org/search.json?title=${searchedBook}`
       );
 
       if (!response.ok) {
@@ -93,7 +93,7 @@ export const fetchWorksData = (id) => {
       const authorData = await fetchAuthorData(authorId);
       
       let coverId = "";
-      let description = "No description found";
+      let description = "";
 
       if (data.description?.value) {
         description = data.description.value;

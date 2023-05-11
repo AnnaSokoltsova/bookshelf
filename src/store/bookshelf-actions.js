@@ -13,6 +13,7 @@ export const sendBookshelfData = (id, author, title, coverImg, userId) => {
           author,
           title,
           coverImg,
+          comments: [],
           isFavorite: true,
           inProgressStatus: false,
           completedStatus: false,
@@ -88,5 +89,24 @@ export const removeBook = (id, userId) => {
       }
     };
     deleteBook();
+  };
+}
+
+export const addComment = (id, userId, comments) => {
+  return (dispatch) => {
+    const updateBook = async () => {
+      try {
+        const userCollectionRef = collection(db, `books ${userId}`);
+        const bookRef = doc(userCollectionRef, id);
+        await updateDoc(bookRef, comments);
+        console.log('comment added');
+      } catch (error) {
+        console.log(error.message);
+        dispatch(
+          uiActions.showNotification('Adding comment failed')
+        );
+      }
+    };
+    updateBook();
   };
 }

@@ -60,7 +60,7 @@ const bookshelfSlice = createSlice({
       const id = action.payload.id;
       const comment = action.payload.comment;
       const reviewedBook = state.books.find((book) => book.id === id);
-      reviewedBook.comments.push(comment)
+      reviewedBook.comments.unshift(comment)
     }
   },
 });
