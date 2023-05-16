@@ -2,6 +2,10 @@ import { bookSearchActions } from "./book-search-slice";
 import { bookpageActions } from "./book-page-slice";
 import missingCover from "../images/missingcover.png";
 
+function truncate(str) {
+  return str.length > 30 ? str.substring(0, 28) + "..." : str;
+};
+
 export const fetchBooksData = (searchedBook) => {
   return async (dispatch) => {
     const fetchData = async () => {
@@ -27,14 +31,24 @@ export const fetchBooksData = (searchedBook) => {
       if (docs) {
         const newBooks = docs.slice(0, 20).map((bookSingle) => {
           const { key, author_name, cover_i, title } = bookSingle;
+
           const newId = key.substring(7);
+
+          let authorNames;
+          let titleName = truncate(title);
+
+          if (author_name) {
+            const authors = author_name.join(", ");
+            authorNames = truncate(authors);
+          }
+
           return {
             id: newId,
-            author: author_name || ["Unknown"],
+            author: authorNames || ["Unknown"],
             coverImg: cover_i
               ? `https://covers.openlibrary.org/b/id/${cover_i}-L.jpg`
               : missingCover,
-            title: title,
+            title: titleName,
           };
         });
         dispatch(bookSearchActions.showBookResults(newBooks));
@@ -83,17 +97,26 @@ export const fetchWorksData = (id) => {
       return data;
     };
     dispatch(bookpageActions.showPageData({}));
-   
 
     try {
       const data = await fetchWorkData();
-      
+     
+      console.log(data.subjects);
       const authorId = data.authors[0].author.key;
-      
+
       const authorData = await fetchAuthorData(authorId);
+
       
       let coverId = "";
       let description = "";
+      let subjects;
+
+      if (data.subjects) {
+        const subjectsList = [...data.subjects];
+        const subjectsSubset = (subjectsList.length) > 30 ? subjectsList.slice(0, 30) : subjectsList;
+        
+        subjects = subjectsSubset.join("', '");
+      }
 
       if (data.description?.value) {
         description = data.description.value;
@@ -112,6 +135,7 @@ export const fetchWorksData = (id) => {
           ? `https://covers.openlibrary.org/b/id/${coverId}-L.jpg`
           : missingCover,
         description: description,
+        subjects
       };
       dispatch(bookpageActions.showPageData(bookData));
       dispatch(bookpageActions.changeLoadingStatus(false));
