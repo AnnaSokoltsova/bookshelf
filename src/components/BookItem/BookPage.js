@@ -14,12 +14,14 @@ export default function BookPage({ children }) {
   const loadingStatus = useSelector((state) => state.bookpage.isLoading);
   const [bookDescrStatus, setBookDescrStatus] = useState(true);
 
-  const { author, coverImg, title, description } = bookPage;
+  const { author, coverImg, title, description, subjects } = bookPage;
 
- 
-  useEffect(()=> {
-      if (!loadingStatus && (description.length === 0 || description?.includes("Contains:"))) {
-        setBookDescrStatus(false)
+  useEffect(() => {
+    if (
+      !loadingStatus &&
+      (description.length === 0 || description?.includes("Contains:"))
+    ) {
+      setBookDescrStatus(false);
     }
   }, [description, loadingStatus]);
 
@@ -54,9 +56,17 @@ export default function BookPage({ children }) {
                 <span>Title: </span>
                 <span>{title}</span>
               </div>
-              {bookDescrStatus && <div className={classes["book-page__text"]}>
-                <span>Description: </span>
-                <span className={classes["book-page__descr"]}>{description}</span>
+              {bookDescrStatus && (
+                <div className={classes["book-page__text"]}>
+                  <span>Description: </span>
+                  <span className={classes["book-page__descr"]}>
+                    {description}
+                  </span>
+                </div>
+              )}
+              {subjects && <div className={classes["book-page__text"]}>
+                <span>Subjects: </span>
+                <span>'{subjects}'</span>
               </div>}
             </div>
           </div>
