@@ -10,7 +10,7 @@ import {
   Box,
 } from "@mui/material";
 
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import bookshelf from "../../images/bookshelfsimple.png";
 import { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
@@ -31,7 +31,7 @@ export default function NavBar() {
     setAnchorEl(null);
   };
 
-  const toValue = currentUser ? '/profile' : '/signin';
+  const toValue = currentUser ? "/profile" : "/signin";
 
   return (
     <Box>
@@ -47,15 +47,18 @@ export default function NavBar() {
           {/* {!isDesktop && (
             <DrawerComponent handleStoriesClick={handleStoriesClick} />
           )} */}
-          <Avatar
-            alt="bookshelf"
-            src={bookshelf}
-            sx={{
-              width: 45,
-              height: 45,
-            }}
-            variant="square"
-          />
+
+          <Link to="/">
+            <Avatar
+              alt="bookshelf"
+              src={bookshelf}
+              sx={{
+                width: 45,
+                height: 45,
+              }}
+              variant="square"
+            />
+          </Link>
 
           <Box
             sx={{ display: "flex", alignItems: "center", marginLeft: "auto" }}

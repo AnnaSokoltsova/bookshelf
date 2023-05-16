@@ -23,11 +23,14 @@ export default function BookItemAdded({
       <div className={classes["single-book__content"]}>
         <div className={classes["single-book__text-container"]}>
           <div className={classes["single-book__text"]}>
-            <span>Author: {author.join(", ")}</span>
+            <span>{author}</span>
           </div>
           <div className={classes["single-book__text"]}>
-            <Link to={`/bookshelf/${id}`}>
-              <span>Title: {title}</span>
+            <Link
+              to={`/bookshelf/${id}`}
+              className={classes["single-book__link"]}
+            >
+              {title}
             </Link>
           </div>
         </div>
