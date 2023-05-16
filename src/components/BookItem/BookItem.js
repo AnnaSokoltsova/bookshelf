@@ -9,6 +9,7 @@ export default function BookItem({ children, id, author, title, coverImg }) {
     event.currentTarget.src = missingCover;
   };
 
+
   return (
     <article className={classes["single-book"]}>
       <div className={classes["single-book__image"]}>
@@ -17,10 +18,10 @@ export default function BookItem({ children, id, author, title, coverImg }) {
       <div className={classes["single-book__content"]}>
         <div className={classes["single-book__text-container"]}>
           <div className={classes["single-book__text"]}>
-            <span>Author: {author.join(", ")}</span>
+            <span>{author}</span>
           </div>
           <div className={classes["single-book__text"]}>
-            <Link to={`/${id}`}><span>Title: {title}</span></Link>
+            <Link to={`/${id}`} className={classes["single-book__link"]}>{title}</Link>
           </div>
         </div>
         {children}
