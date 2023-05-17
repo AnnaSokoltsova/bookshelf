@@ -12,10 +12,12 @@ export default function InProgress() {
   return (
     <Container>
       <h2>In progress:</h2>
+      {!booksInProgress.length && (
+        <h3 className={classes["empty-text"]}>
+          You are not reading books currently{" "}
+        </h3>
+      )}
       <div className={classes["book-container"]}>
-        {!booksInProgress.length && (
-          <h3>You are not reading books currently </h3>
-        )}
         {booksInProgress.map((book) => (
           <BookItemAdded
             key={book.id}

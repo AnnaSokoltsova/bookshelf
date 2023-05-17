@@ -4,7 +4,6 @@ import BookItemAdded from "../../BookItem/BookItemAdded";
 import FavoriteButtons from "./FavoriteButtons";
 import Container from "../../Container/Container";
 
-
 export default function Favorites() {
   const bookItems = useSelector((state) => state.bookshelf.books);
 
@@ -13,8 +12,10 @@ export default function Favorites() {
   return (
     <Container>
       <h2>Books to read:</h2>
+      {!favoriteBooks.length && (
+        <h3 className={classes["empty-text"]}>Bookshelf is empty</h3>
+      )}
       <div className={classes["book-container"]}>
-        {!favoriteBooks.length && <h3>Bookshelf is empty</h3>}
         {favoriteBooks.map((book) => (
           <BookItemAdded
             key={book.id}

@@ -36,6 +36,12 @@
   margin-bottom: 10px;
   word-wrap: break-word;
 }
+
+.book-page__text span:first-child {
+  font-weight: 600;
+  font-family: 'Kurale', serif;
+}
+
 .book-page__descr {
   overflow-wrap: break-word;
 }

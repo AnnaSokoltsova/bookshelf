@@ -11,10 +11,10 @@ export default function CompletedShelf() {
   return (
     <Container>
       <h2>In progress:</h2>
-      <div className={classes["book-container"]}>
-        {!completedBooks.length && (
-          <h3>You have not finished reading a book yet </h3>
+      {!completedBooks.length && (
+          <h3 className={classes["empty-text"]}>You have not finished reading a book yet </h3>
         )}
+      <div className={classes["book-container"]}>
         {completedBooks.map((book) => (
           <BookItemAdded
             key={book.id}
