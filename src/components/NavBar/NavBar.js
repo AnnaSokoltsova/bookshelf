@@ -24,6 +24,7 @@ export default function NavBar() {
   const { currentUser } = useAuth();
 
   const handleClick = (event) => {
+    event.preventDefault();
     setAnchorEl(event.currentTarget);
   };
 
@@ -79,7 +80,7 @@ export default function NavBar() {
               aria-controls={open ? "resources-menu" : undefined}
               aria-haspopup="true"
               aria-expanded={open ? "true" : undefined}
-              onMouseEnter={handleClick}
+              onClick={handleClick}
             >
               <NavLink
                 to="/bookshelf"
@@ -95,20 +96,12 @@ export default function NavBar() {
               anchorEl={anchorEl}
               open={open}
               onClose={handleClose}
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "right",
-              }}
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
+              
               MenuListProps={{
                 "aria-labelledby": "resources-button",
               }}
             >
               <MenuItem onClick={handleClose}>
-                {" "}
                 <NavLink
                   to="/bookshelf"
                   className={({ isActive }) =>

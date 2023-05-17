@@ -1,8 +1,9 @@
 import { useSelector } from "react-redux";
 
 import BookItem from "../../BookItem/BookItem";
-import BookResultButton from "./BookResultButton";
+import BookResultButton from "../../BookItem/AddBookButton";
 import classes from "./BookResults.module.css";
+
 
 export default function BookResults() {
   const bookResults = useSelector((state) => state.bookSearch.bookResults);
