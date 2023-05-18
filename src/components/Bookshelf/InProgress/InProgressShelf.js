@@ -3,6 +3,7 @@ import classes from "../../BookSearch/BookResults/BookResults.module.css";
 import BookItemAdded from "../../BookItem/BookItemAdded";
 import InProgressButtons from "./InProgressButtons";
 import Container from "../../Container/Container";
+import ErrorAlert from "../../Badges/ErrorAlert";
 
 export default function InProgress() {
   const bookItems = useSelector((state) => state.bookshelf.books);
@@ -30,6 +31,7 @@ export default function InProgress() {
           </BookItemAdded>
         ))}
       </div>
+      <ErrorAlert/>
     </Container>
   );
 }

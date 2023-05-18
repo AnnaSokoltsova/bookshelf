@@ -1,5 +1,7 @@
 .book-container {
   display: grid;
+  position: 'relative';
+  overflow: 'scroll';
   grid-template-columns: repeat(1, 1fr);
   column-gap: 2rem;
 }

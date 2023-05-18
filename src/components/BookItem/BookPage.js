@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { fetchWorksData } from "../../store/fetchFromOpenLibrary";
 import { useDispatch } from "react-redux";
 import missingCover from "../../images/missingcover.png";
+import ErrorAlert from "../Badges/ErrorAlert";
 
 export default function BookPage({ children }) {
   const { pageid } = useParams();
@@ -72,6 +73,7 @@ export default function BookPage({ children }) {
           </div>
         </div>
       )}
+      <ErrorAlert/>
       {children}
     </Container>
   );

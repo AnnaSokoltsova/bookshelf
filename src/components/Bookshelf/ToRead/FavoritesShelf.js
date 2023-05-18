@@ -3,6 +3,7 @@ import classes from "../../BookSearch/BookResults/BookResults.module.css";
 import BookItemAdded from "../../BookItem/BookItemAdded";
 import FavoriteButtons from "./FavoriteButtons";
 import Container from "../../Container/Container";
+import ErrorAlert from "../../Badges/ErrorAlert";
 
 export default function Favorites() {
   const bookItems = useSelector((state) => state.bookshelf.books);
@@ -28,6 +29,7 @@ export default function Favorites() {
           </BookItemAdded>
         ))}
       </div>
+      <ErrorAlert/>
     </Container>
   );
 }

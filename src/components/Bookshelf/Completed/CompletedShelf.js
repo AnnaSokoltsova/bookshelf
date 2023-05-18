@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 import classes from "../../BookSearch/BookResults/BookResults.module.css";
 import BookItemAdded from "../../BookItem/BookItemAdded";
 import Container from "../../Container/Container";
+import ErrorAlert from "../../Badges/ErrorAlert";
 
 export default function CompletedShelf() {
   const bookItems = useSelector((state) => state.bookshelf.books);
@@ -10,7 +11,7 @@ export default function CompletedShelf() {
 
   return (
     <Container>
-      <h2>In progress:</h2>
+      <h2>Completed:</h2>
       {!completedBooks.length && (
           <h3 className={classes["empty-text"]}>You have not finished reading a book yet </h3>
         )}
@@ -25,6 +26,7 @@ export default function CompletedShelf() {
           ></BookItemAdded>
         ))}
       </div>
+      <ErrorAlert/>
     </Container>
   );
 }
