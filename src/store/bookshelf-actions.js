@@ -18,16 +18,16 @@ export const sendBookshelfData = (id, author, title, coverImg, userId) => {
           inProgressStatus: false,
           completedStatus: false,
         };
+        
         const userCollectionRef = collection(db, `books ${userId}`);
         const bookRef = doc(userCollectionRef, id);
         await setDoc(bookRef, addedBook);
-        console.log("book added");
-        dispatch(uiActions.showNotification("Added to the bookshelf"));
+        
       } catch (error) {
-        console.log(error.message);
         dispatch(
-          uiActions.showNotification("Error when adding a book:", error)
+          uiActions.showNotification("Error when adding a book")
         );
+        dispatch(uiActions.setNotificationFlag());
       }
     };
     sendBook();
@@ -40,14 +40,14 @@ export const fetchBookshelfData = (userId) => {
       try {
         const userCollectionRef = collection(db, `books ${userId}`);
         const data = await getDocs(userCollectionRef);
-        console.log(data);
+        
         const bookshelfData = data.docs.map((doc) => ({...doc.data()}))
         dispatch(bookshelfActions.replaceBookshelf(bookshelfData || []));
-      } catch (error) {
-        console.log(error.message);
+      } catch (error) {        
         dispatch(
           uiActions.showNotification('Fetching bookshelf data failed!')
         );
+        dispatch(uiActions.setNotificationFlag());
       }
     };
     getBooks();
@@ -61,12 +61,13 @@ export const updateBookStatus = (id, userId, bookStatuses) => {
         const userCollectionRef = collection(db, `books ${userId}`);
         const bookRef = doc(userCollectionRef, id);
         await updateDoc(bookRef, bookStatuses);
-        console.log('book updated');
+        
       } catch (error) {
-        console.log(error.message);
+       
         dispatch(
           uiActions.showNotification('Updating book status failed')
         );
+        dispatch(uiActions.setNotificationFlag());
       }
     };
     updateBook();
@@ -80,12 +81,13 @@ export const removeBook = (id, userId) => {
         const userCollectionRef = collection(db, `books ${userId}`);
         const bookRef = doc(userCollectionRef, id);
         await deleteDoc(bookRef);
-        console.log('book deleted');
+    
       } catch (error) {
-        console.log(error.message);
+
         dispatch(
-          uiActions.showNotification('Deleting book failed')
+          uiActions.showNotification('Removing book failed')
         );
+        dispatch(uiActions.setNotificationFlag());
       }
     };
     deleteBook();
@@ -99,12 +101,14 @@ export const addComment = (id, userId, comments) => {
         const userCollectionRef = collection(db, `books ${userId}`);
         const bookRef = doc(userCollectionRef, id);
         await updateDoc(bookRef, comments);
-        console.log('comments sent to firebase');
+        
       } catch (error) {
-        console.log(error.message);
+       
         dispatch(
-          uiActions.showNotification('Adding comment failed')
-        );
+          uiActions.showNotification('Adding or deleting comment failed')
+        ); 
+        dispatch(uiActions.setNotificationFlag());
+
       }
     };
     updateBook();

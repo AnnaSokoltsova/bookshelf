@@ -2,9 +2,6 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   books: [],
-  bookDuplicate: false,
-  inProgress: false,
-  completed: false,
 };
 
 const bookshelfSlice = createSlice({
@@ -28,9 +25,7 @@ const bookshelfSlice = createSlice({
           inProgressStatus: false,
           completedStatus: false,
         });
-      } else {
-        state.bookDuplicate = true;
-      }
+      } 
       
     },
     removeFromBookShelf(state, action) {
