@@ -19,7 +19,7 @@ export const sendBookshelfData = (id, author, title, coverImg, userId) => {
           completedStatus: false,
         };
         
-        const userCollectionRef = collection(db, `books ${userId}`);
+        const userCollectionRef = collection(db, `${userId}`);
         const bookRef = doc(userCollectionRef, id);
         await setDoc(bookRef, addedBook);
         
@@ -38,7 +38,7 @@ export const fetchBookshelfData = (userId) => {
   return (dispatch) => {
     const getBooks = async () => {
       try {
-        const userCollectionRef = collection(db, `books ${userId}`);
+        const userCollectionRef = collection(db, `${userId}`);
         const data = await getDocs(userCollectionRef);
         
         const bookshelfData = data.docs.map((doc) => ({...doc.data()}))
@@ -58,7 +58,7 @@ export const updateBookStatus = (id, userId, bookStatuses) => {
   return (dispatch) => {
     const updateBook = async () => {
       try {
-        const userCollectionRef = collection(db, `books ${userId}`);
+        const userCollectionRef = collection(db, `${userId}`);
         const bookRef = doc(userCollectionRef, id);
         await updateDoc(bookRef, bookStatuses);
         
@@ -78,7 +78,7 @@ export const removeBook = (id, userId) => {
   return (dispatch) => {
     const deleteBook = async () => {
       try {
-        const userCollectionRef = collection(db, `books ${userId}`);
+        const userCollectionRef = collection(db, `${userId}`);
         const bookRef = doc(userCollectionRef, id);
         await deleteDoc(bookRef);
     
@@ -98,7 +98,7 @@ export const addComment = (id, userId, comments) => {
   return (dispatch) => {
     const updateBook = async () => {
       try {
-        const userCollectionRef = collection(db, `books ${userId}`);
+        const userCollectionRef = collection(db, `${userId}`);
         const bookRef = doc(userCollectionRef, id);
         await updateDoc(bookRef, comments);
         
