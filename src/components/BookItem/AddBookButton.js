@@ -1,8 +1,6 @@
 import classes from "./BookItem.module.css";
 
-
-export default function AddBookButton({ handleAddBook}) {
-
+export default function AddBookButton({ handleAddBook }) {
   return (
     <button className={classes["single-book__btn"]} onClick={handleAddBook}>
       <svg>

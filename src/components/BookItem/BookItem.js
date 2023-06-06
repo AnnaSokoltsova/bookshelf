@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { useDispatch } from "react-redux";
@@ -6,20 +6,16 @@ import { bookshelfActions } from "../../store/bookshelf-slice";
 import { useNavigate } from "react-router-dom";
 import { sendBookshelfData } from "../../store/bookshelf-actions";
 import missingCover from "../../images/missingcover.png";
-import Bookmark from "../Badges/Bookmark";
+import { Bookmark } from "../Badges/Bookmark";
 
 import AddBookButton from "./AddBookButton";
 import classes from "./BookItem.module.css";
-
-
 
 export default function BookItem({ id, author, title, coverImg }) {
   const [bookAdded, setBookAdded] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { currentUser } = useAuth();
-
- 
 
   const replaceImageOnError = (event) => {
     event.currentTarget.src = missingCover;
@@ -68,11 +64,11 @@ export default function BookItem({ id, author, title, coverImg }) {
         <AddBookButton
           author={author}
           id={id}
+          bookshelf
           title={title}
           coverImg={coverImg}
           handleAddBook={handleAddBook}
         />
-       
       </div>
     </article>
   );

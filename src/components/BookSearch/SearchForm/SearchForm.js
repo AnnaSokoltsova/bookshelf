@@ -19,7 +19,7 @@ function SearchForm(props) {
         dispatch(fetchBooksData(searchText));
       }
     } else {
-      console.log(isMounted);
+      
       dispatch(fetchBooksData("The Hobbit"));
       isMounted = true;
     }

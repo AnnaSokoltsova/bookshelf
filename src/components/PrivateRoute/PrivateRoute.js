@@ -7,3 +7,5 @@ export default function PrivateRoute({ children }) {
 
   return currentUser ? children : <Navigate to="/profile" />;
 }
+
+// boolean check first
