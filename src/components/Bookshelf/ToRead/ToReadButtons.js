@@ -6,7 +6,7 @@ import { useAuth } from "../../../context/AuthContext";
 import { updateBookStatus } from "../../../store/bookshelf-actions";
 import { removeBook } from "../../../store/bookshelf-actions";
 
-export default function FavoriteButtons({ id }) {
+export default function ToReadButtons({ id }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { currentUser } = useAuth();

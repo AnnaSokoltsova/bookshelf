@@ -8,62 +8,56 @@ const bookshelfSlice = createSlice({
   name: "bookshelf",
   initialState,
   reducers: {
-    replaceBookshelf(state, action) {
-      state.books = action.payload
+    replaceBookshelf(state, { payload }) {
+      state.books = payload;
     },
-    addBookToShelf(state, action) {
-      const newBook = action.payload;
-      const existingBook = state.books.find((book) => book.id === newBook.id);
+    addBookToShelf(state, { payload: { id, author, title, coverImg } }) { 
+      const existingBook = state.books.find((book) => book.id === id);
       if (!existingBook) {
         state.books.push({
-          id: newBook.id,
-          author: newBook.author,
-          title: newBook.title,
-          coverImg: newBook.coverImg,
+          id: id,
+          author: author,
+          title: title,
+          coverImg: coverImg,
           comments: [],
           isFavorite: true,
           inProgressStatus: false,
           completedStatus: false,
         });
-      } 
-      
+      }
     },
-    removeFromBookShelf(state, action) {
-      const id = action.payload;
+    removeFromBookShelf(state, { payload }) {
+      const id = payload;
       state.books = state.books.filter((book) => book.id !== id);
-      
     },
-    startReading(state, action) {
-      const id = action.payload;
+    startReading(state, { payload }) {
+      const id = payload;
       const bookInProgress = state.books.find((book) => book.id === id);
       bookInProgress.inProgressStatus = true;
       bookInProgress.isFavorite = false;
     },
-    stopReading(state, action) {
-      const id = action.payload;
+    stopReading(state, { payload }) {
+      const id = payload;
       const bookInProgress = state.books.find((book) => book.id === id);
       bookInProgress.inProgressStatus = false;
       bookInProgress.isFavorite = true;
     },
-    finishTheBook(state, action) {
-      const id = action.payload;
+    finishTheBook(state, { payload }) {
+      const id = payload;
       const finishedBook = state.books.find((book) => book.id === id);
       finishedBook.inProgressStatus = false;
       finishedBook.completedStatus = true;
     },
-    addComment(state, action) {
-      const commentId = action.payload.commentId;
-      const pageId = action.payload.pageid;
-      const comment = action.payload.comment;
-      const reviewedBook = state.books.find((book) => book.id === pageId);
-      reviewedBook.comments.unshift({commentId, text: comment})
+    addComment(state, { payload: {pageid, commentId, comment} }) {
+      const reviewedBook = state.books.find((book) => book.id === pageid);
+      reviewedBook.comments.unshift({ commentId, text: comment });
     },
-    removeComment(state, action) {
-      const id = action.payload.id;
-      const pageId = action.payload.pageid;
-      const reviewedBook = state.books.find((book) => book.id === pageId);
-      reviewedBook.comments = reviewedBook.comments.filter((comment) => comment.commentId !== id);
-    }
+    removeComment(state, { payload : {id, pageid} }) {
+      const reviewedBook = state.books.find((book) => book.id === pageid);
+      reviewedBook.comments = reviewedBook.comments.filter(
+        (comment) => comment.commentId !== id
+      );
+    },
   },
 });
 

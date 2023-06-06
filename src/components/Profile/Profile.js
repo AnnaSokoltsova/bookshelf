@@ -21,6 +21,8 @@ export default function Profile() {
     }
   }
 
+  console.log(currentUser);
+
   return (
     <Container>
       <div >

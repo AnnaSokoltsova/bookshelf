@@ -1,11 +1,11 @@
 import { useSelector } from "react-redux";
 import classes from "../../BookSearch/BookResults/BookResults.module.css";
 import BookItemAdded from "../../BookItem/BookItemAdded";
-import FavoriteButtons from "./FavoriteButtons";
+import ToReadButtons from "./ToReadButtons";
 import Container from "../../Container/Container";
 import ErrorAlert from "../../Badges/ErrorAlert";
 
-export default function Favorites() {
+export default function ToReadShelf() {
   const bookItems = useSelector((state) => state.bookshelf.books);
 
   const favoriteBooks = bookItems.filter((book) => book.isFavorite);
@@ -25,7 +25,7 @@ export default function Favorites() {
             title={book.title}
             coverImg={book.coverImg}
           >
-            <FavoriteButtons id={book.id} />
+            <ToReadButtons id={book.id} />
           </BookItemAdded>
         ))}
       </div>

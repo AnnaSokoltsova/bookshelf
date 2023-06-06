@@ -4,7 +4,7 @@ import missingCover from "../images/missingcover.png";
 
 function truncate(str) {
   return str.length > 30 ? str.substring(0, 28) + "..." : str;
-};
+}
 
 export const fetchBooksData = (searchedBook) => {
   return async (dispatch) => {
@@ -25,32 +25,19 @@ export const fetchBooksData = (searchedBook) => {
     dispatch(bookSearchActions.changeLoadingStatus());
     dispatch(bookSearchActions.setSearchTitle(""));
     try {
-      const data = await fetchData();
-      const { docs } = data;
+      const { docs } = await fetchData();
       console.log(docs);
       if (docs) {
-        const newBooks = docs.slice(0, 20).map((bookSingle) => {
-          const { key, author_name, cover_i, title } = bookSingle;
-
-          const newId = key.substring(7);
-
-          let authorNames;
-          let titleName = truncate(title);
-
-          if (author_name) {
-            const authors = author_name.join(", ");
-            authorNames = truncate(authors);
-          }
-
-          return {
-            id: newId,
-            author: authorNames || ["Unknown"],
+        const newBooks = docs
+          .slice(0, 20)
+          .map(({ key, author_name, cover_i, title }) => ({
+            id: key.substring(7),
+            author: author_name ? truncate(author_name.join(", ")) : "Unknown",
             coverImg: cover_i
               ? `https://covers.openlibrary.org/b/id/${cover_i}-L.jpg`
               : missingCover,
-            title: titleName,
-          };
-        });
+            title: truncate(title),
+          }));
         dispatch(bookSearchActions.showBookResults(newBooks));
         dispatch(bookSearchActions.changeLoadingStatus());
 
@@ -100,42 +87,29 @@ export const fetchWorksData = (id) => {
 
     try {
       const data = await fetchWorkData();
-     
-      console.log(data.subjects);
       const authorId = data.authors[0].author.key;
 
-      const authorData = await fetchAuthorData(authorId);
+      const {name} = await fetchAuthorData(authorId);
 
       
-      let coverId = "";
-      let description = "";
       let subjects;
 
       if (data.subjects) {
         const subjectsList = [...data.subjects];
-        const subjectsSubset = (subjectsList.length) > 30 ? subjectsList.slice(0, 30) : subjectsList;
-        
+        const subjectsSubset =
+          subjectsList.length > 30 ? subjectsList.slice(0, 30) : subjectsList;
+
         subjects = subjectsSubset.join("', '");
       }
 
-      if (data.description?.value) {
-        description = data.description.value;
-      } else if (data.description) {
-        description = data.description;
-      }
-
-      if (data.covers?.length > 0) {
-        coverId = data.covers[0];
-      }
-
       const bookData = {
-        author: authorData.name,
+        author: name,
         title: data.title,
-        coverImg: coverId
-          ? `https://covers.openlibrary.org/b/id/${coverId}-L.jpg`
+        coverImg: (data.covers?.length > 0) 
+          ? `https://covers.openlibrary.org/b/id/${data.covers[0]}-L.jpg`
           : missingCover,
-        description: description,
-        subjects
+        description: data.description?.value ? data.description.value : data.description ? data.description : "",
+        subjects,
       };
       dispatch(bookpageActions.showPageData(bookData));
       dispatch(bookpageActions.changeLoadingStatus(false));

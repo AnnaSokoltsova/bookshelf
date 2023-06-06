@@ -9,11 +9,11 @@ const bookpageSlice = createSlice({
   name: "bookpage",
   initialState,
   reducers: {
-    showPageData(state, action) {
-      state.bookpage = action.payload
+    showPageData(state, { payload }) {
+      state.bookpage = payload;
     },
-    changeLoadingStatus(state, action) {
-      state.isLoading = action.payload;
+    changeLoadingStatus(state, { payload }) {
+      state.isLoading = payload;
     },
   },
 });
