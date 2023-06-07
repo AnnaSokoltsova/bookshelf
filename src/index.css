@@ -38,7 +38,7 @@ code {
 .link {
   color: var(--clr-text);
   text-decoration: none;
-  
+  font-family: 'Albert Sans', sans-serif;
 }
 
 .active {
