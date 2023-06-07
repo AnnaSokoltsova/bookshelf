@@ -12,7 +12,8 @@ import {
   SignIn,
   SignUp,
   CommentsForm,
-  Comments
+  Comments,
+  ForgotPassword
 } from "./components";
 
 import { useEffect } from "react";
@@ -61,6 +62,7 @@ function App() {
           <Route path="signup" element={<SignUp />} />
           <Route path="signin" element={<SignIn />} />
           <Route path="profile" element={<Profile />} />
+          <Route path="forgotpassword" element={<ForgotPassword />} />
         </Route>
       </Routes>
     </BrowserRouter>

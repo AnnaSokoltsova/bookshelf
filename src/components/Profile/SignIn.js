@@ -83,7 +83,7 @@ export default function SignIn() {
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             />
-            {error && <p style={{ color: "red" }}>{error}</p>}
+            {error && <p style={{ color: "red", textAlign: 'center' }}>{error}</p>}
             <Button
               type="submit"
               fullWidth
@@ -94,7 +94,7 @@ export default function SignIn() {
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link to="/signup">
+                <Link to="/forgotpassword">
                   Forgot password?
                 </Link>
               </Grid>
