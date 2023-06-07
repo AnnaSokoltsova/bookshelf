@@ -1,13 +1,12 @@
-import { Avatar, Toolbar, useTheme, Menu, MenuItem, Box } from "@mui/material";
+import { Avatar, Button, Toolbar, Menu, MenuItem, Box } from "@mui/material";
 
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { NavLink, Link } from "react-router-dom";
 import bookshelf from "../../images/bookshelfsimple.png";
 import { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 
 export default function DesktopNavBar() {
-  const theme = useTheme();
-
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
 
@@ -27,10 +26,6 @@ export default function DesktopNavBar() {
   return (
     <Box>
       <Toolbar>
-        {/* {!isDesktop && (
-            <DrawerComponent handleStoriesClick={handleStoriesClick} />
-          )} */}
-
         <Link to="/">
           <Avatar
             alt="bookshelf"
@@ -44,29 +39,29 @@ export default function DesktopNavBar() {
         </Link>
 
         <Box sx={{ display: "flex", alignItems: "center", marginLeft: "auto" }}>
-          <MenuItem key={"search"}>
+          <Button key={"search"}>
             <NavLink
               to="/"
               className={({ isActive }) => (isActive ? "link active" : "link")}
             >
               Search
             </NavLink>
-          </MenuItem>
-          <MenuItem
+          </Button>
+          <Button
             key={"bookshelf"}
             id="resources-button"
             aria-controls={open ? "resources-menu" : undefined}
             aria-haspopup="true"
             aria-expanded={open ? "true" : undefined}
+            endIcon={<KeyboardArrowDownIcon />}
             onClick={handleClick}
+            sx={{
+              color: "var(--clr-text)",
+              fontFamily: "Albert Sans",
+            }}
           >
-            <NavLink
-              to={"/bookshelf"}
-              className={({ isActive }) => (isActive ? "link active" : "link")}
-            >
-              Bookshelf
-            </NavLink>
-          </MenuItem>
+            Bookshelf
+          </Button>
           <Menu
             id="resources-menu"
             anchorEl={anchorEl}
@@ -78,7 +73,7 @@ export default function DesktopNavBar() {
           >
             <MenuItem onClick={handleClose}>
               <NavLink
-                to="/bookshelf"
+                to="/bookshelf/toread"
                 className={({ isActive }) =>
                   isActive ? "link active" : "link"
                 }
@@ -109,14 +104,14 @@ export default function DesktopNavBar() {
             </MenuItem>
           </Menu>
 
-          <MenuItem key={"profile"}>
+          <Button key={"profile"}>
             <NavLink
               to={toValue}
               className={({ isActive }) => (isActive ? "link active" : "link")}
             >
               Profile
             </NavLink>
-          </MenuItem>
+          </Button>
         </Box>
       </Toolbar>
     </Box>

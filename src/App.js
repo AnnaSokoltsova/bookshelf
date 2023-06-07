@@ -45,7 +45,7 @@ function App() {
               </PrivateRoute>
             }
           >
-            <Route index element={<ToRead />} />
+            <Route path="toread" element={<ToRead />} />
             <Route path="inprogress" element={<InProgress />} />
             <Route path="completed" element={<Completed />} />
             <Route
