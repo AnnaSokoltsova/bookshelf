@@ -2,8 +2,19 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 55%;
+  background: var(--clr-background-light);
+  margin: auto;
+  box-shadow: var(--light-shadow);
+  padding: 2rem;
+  border-radius: 15px ;
+}
+
+.profile__text {
+  font-size: 1rem;
 }
 
 h2 {
   text-align: center;
+  margin-top: 5rem;
 }

@@ -29,7 +29,7 @@ export default function Profile() {
         <h2>Profile</h2>
         {loading ? <p>Loading...</p> : <div className={classes.profile}>
         {currentUser ? (
-          <p>Email: {currentUser.email}</p>
+          <p className={classes["profile__text"]}>Email: {currentUser.email}</p>
         ) : (
           <p>You are not logged in</p>
         )}
