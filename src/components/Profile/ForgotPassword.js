@@ -10,7 +10,7 @@ import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-
+import classes from "./Authentication.module.css";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 
@@ -67,8 +67,8 @@ export default function ForgotPassword() {
             autoComplete="email"
             autoFocus
           />
-          {message && <p style={{ color: "green", textAlign: 'center' }}>{message}</p>}
-          {error && <p style={{ color: "red", textAlign: 'center' }}>{error}</p>}
+          {message && <p className={classes["success__text"]}>{message}</p>}
+          {error && <p className={classes["error__text"]}>{error}</p>}
           <Button
             type="submit"
             fullWidth
