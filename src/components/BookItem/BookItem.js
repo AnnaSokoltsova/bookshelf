@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { sendBookshelfData } from "../../store/bookshelf-actions";
 import missingCover from "../../images/missingcover.png";
 import { Bookmark } from "../Badges/Bookmark";
-
+import { ROUTES_DATA } from "../../routes";
 import AddBookButton from "./AddBookButton";
 import classes from "./BookItem.module.css";
 
@@ -23,7 +23,7 @@ export default function BookItem({ id, author, title, coverImg }) {
 
   const handleAddBook = () => {
     if (!currentUser) {
-      navigate("/signin");
+      navigate(ROUTES_DATA.AUTH.SIGN_IN.url);
       return;
     }
 

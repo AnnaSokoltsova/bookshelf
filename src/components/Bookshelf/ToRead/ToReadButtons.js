@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../context/AuthContext";
 import { updateBookStatus } from "../../../store/bookshelf-actions";
 import { removeBook } from "../../../store/bookshelf-actions";
+import { ROUTES_DATA } from "../../../routes";
 
 export default function ToReadButtons({ id }) {
   const dispatch = useDispatch();
@@ -21,7 +22,7 @@ export default function ToReadButtons({ id }) {
 
   const handleClick = () => {
     dispatch(bookshelfActions.startReading(id));
-    navigate("/bookshelf/inprogress");
+    navigate(ROUTES_DATA.BOOKSHELF.IN_PROGRESS.url);
 
     const bookStatuses = {
       inProgressStatus: true,

@@ -4,20 +4,26 @@ import { Avatar } from "@mui/material";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-
+import { ROUTES_DATA } from "../../routes";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import classes from "./Authentication.module.css";
+
 import { Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
+import { uiActions } from "../../store/ui-slice";
+import { useDispatch } from "react-redux";
+import ErrorAlert from "../Badges/ErrorAlert";
+import { MESSAGES } from "../../text";
+
 
 export default function ForgotPassword() {
   const { resetPassword } = useAuth();
-  const [error, setError] = useState("");
-  const [message, setMessage] = useState("");
+
+  const [message, setMessage] = useState(false);
+  const dispatch = useDispatch();
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -25,16 +31,20 @@ export default function ForgotPassword() {
     const email = data.get("email");
 
     try {
-      setMessage("");
-      setError("");
       await resetPassword(email);
-      setMessage("Check your inbox for further instructions");
-    } catch(error) {
+      setMessage(true);
+    } catch (error) {
       const message = error.message;
       if (message.includes("auth/user-not-found")) {
-        setError(`Failed to reset password. Email is not found`);
+        dispatch(
+          uiActions.showNotification(
+            MESSAGES.auth.emailNotFound
+          )
+        );
+        
       } else {
-        setError(`Failed to reset password.`);
+        dispatch(uiActions.showNotification(MESSAGES.auth.resetPasswordFailed));
+        
       }
     }
   }
@@ -66,9 +76,10 @@ export default function ForgotPassword() {
             name="email"
             autoComplete="email"
             autoFocus
+            helperText={
+              message ? MESSAGES.auth.checkInbox : ""
+            }
           />
-          {message && <p className={classes["success__text"]}>{message}</p>}
-          {error && <p className={classes["error__text"]}>{error}</p>}
           <Button
             type="submit"
             fullWidth
@@ -79,11 +90,14 @@ export default function ForgotPassword() {
           </Button>
           <Grid container justifyContent="center">
             <Grid item>
-              <Link to="/signin">Remember Password? Sign in</Link>
+              <Link to={ROUTES_DATA.AUTH.SIGN_IN.url}>
+                Remember Password? Sign in
+              </Link>
             </Grid>
           </Grid>
         </Box>
       </Box>
+      <ErrorAlert />
     </Container>
   );
 }

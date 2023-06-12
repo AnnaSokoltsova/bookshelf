@@ -8,65 +8,62 @@ import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import classes from "./Authentication.module.css";
+import ErrorAlert from "../Badges/ErrorAlert";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
-
-const isEmail = (email) =>
-  /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email);
-
-const isValidPassword = (password) => /^(?=.*\d).{8,}$/.test(password);
+import { isEmail, isValidPassword } from "../../validations";
+import { ROUTES_DATA } from "../../routes";
+import { uiActions } from "../../store/ui-slice";
+import { useDispatch } from "react-redux";
+import { MESSAGES } from "../../text";
 
 export default function SignUp() {
   const { signup } = useAuth();
-  const [error, setError] = useState("");
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
+  const [passwordMatchingError, setPasswordMatchingError] = useState(false);
 
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  function handleEmailBlur(event) {
+    const email = event.target.value;
+    setEmailError(!isEmail(email));
+  }
+
+  function handlePasswordBlur(event) {
+    const password = event.target.value;
+    setPasswordError(!isValidPassword(password));
+  }
 
   async function handleSubmit(event) {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    const email = data.get("email");
-    const password = data.get("password");
-    const passwordConfirm = data.get("passwordConfirm");
-    let emailOrPasswordInvalid = false;
+    const formData = new FormData(event.currentTarget);
+    const fields = Object.fromEntries(formData.entries());
 
-    if (!isEmail(email)) {
-      setError("");
-      setEmailError(true);
-      emailOrPasswordInvalid = true;
-    } else {
-      setEmailError(false);
-    }
+    const email = fields.email;
+    const password = fields.password;
+    const passwordConfirm = fields.passwordConfirm;
 
-    if (!isValidPassword(password)) {
-      setPasswordError(true);
-      emailOrPasswordInvalid = true;
-    } else {
-      setPasswordError(false);
-    }
-
-    if (emailOrPasswordInvalid) {
+    if (emailError || passwordError || !email || !password) {
       return;
     }
 
     if (password !== passwordConfirm) {
-      return setError("Passwords do not match");
+      return setPasswordMatchingError(true);
     }
 
     try {
       await signup(email, password);
-      navigate("/profile");
+      navigate(ROUTES_DATA.AUTH.PROFILE.url);
     } catch (error) {
       const message = error.message;
 
       if (message.includes("auth/email-already-in-use")) {
-        setError(`Email is already in use`);
+        dispatch(uiActions.showNotification(MESSAGES.auth.emaiAlreadylInUse));
       } else {
-        setError(`Failed to create an account`);
+        dispatch(uiActions.showNotification(MESSAGES.auth.createAccountFailed));
       }
     }
   }
@@ -91,6 +88,7 @@ export default function SignUp() {
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
           <TextField
             error={emailError}
+            onBlur={handleEmailBlur}
             margin="normal"
             required
             fullWidth
@@ -99,10 +97,11 @@ export default function SignUp() {
             name="email"
             autoComplete="email"
             autoFocus
-            helperText={emailError ? "Please enter a valid email address" : ""}
+            helperText={emailError ? MESSAGES.auth.enterValidEmail : ""}
           />
           <TextField
             error={passwordError}
+            onBlur={handlePasswordBlur}
             margin="normal"
             required
             fullWidth
@@ -111,13 +110,10 @@ export default function SignUp() {
             type="password"
             id="password"
             autoComplete="current-password"
-            helperText={
-              passwordError
-                ? "Password should be at least 8 characters long and contain at least one digit"
-                : ""
-            }
+            helperText={passwordError ? MESSAGES.auth.enterValidPassword : ""}
           />
           <TextField
+            error={passwordMatchingError}
             margin="normal"
             required
             fullWidth
@@ -126,9 +122,10 @@ export default function SignUp() {
             type="password"
             id="passwordConfirm"
             autoComplete="current-password"
+            helperText={
+              passwordMatchingError ? MESSAGES.auth.passwordsDoNotMatch : ""
+            }
           />
-
-          {error && <p className={classes["error__text"]}>{error}</p>}
           <Button
             type="submit"
             fullWidth
@@ -139,11 +136,14 @@ export default function SignUp() {
           </Button>
           <Grid container justifyContent="center">
             <Grid item>
-              <Link to="/signin">{"Already have an account? Sign In"}</Link>
+              <Link to={ROUTES_DATA.AUTH.SIGN_IN.url}>
+                {"Already have an account? Sign In"}
+              </Link>
             </Grid>
           </Grid>
         </Box>
       </Box>
+      <ErrorAlert />
     </Container>
   );
 }

@@ -1,6 +1,7 @@
 import classes from "./BookItem.module.css";
 import { Link } from "react-router-dom";
 import missingCover from "../../images/missingcover.png";
+import { ROUTES_DATA } from "../../routes";
 
 export default function BookItemAdded({
   children,
@@ -16,7 +17,7 @@ export default function BookItemAdded({
   return (
     <article className={classes["single-book"]}>
       <div className={classes["single-book__image"]}>
-        <Link to={`/bookshelf/${id}`}>
+        <Link to={`${ROUTES_DATA.BOOKSHELF.url}/${id}`}>
           <img src={coverImg} alt="cover" onError={replaceImageOnError} />
         </Link>
       </div>
@@ -27,7 +28,7 @@ export default function BookItemAdded({
           </div>
           <div className={classes["single-book__text"]}>
             <Link
-              to={`/bookshelf/${id}`}
+              to={`${ROUTES_DATA.BOOKSHELF.url}/${id}`}
               className={classes["single-book__link"]}
             >
               {title}

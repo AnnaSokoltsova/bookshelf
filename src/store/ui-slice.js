@@ -1,8 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  message: '',
-  notificationFlag: false
+  message: ''
 }
 
 const uiSlice = createSlice({
@@ -12,9 +11,6 @@ const uiSlice = createSlice({
     showNotification(state, action) {
       state.message = action.payload;
     },
-    setNotificationFlag(state) {
-      state.notificationFlag = !state.notificationFlag;
-    }
   },
 });
 

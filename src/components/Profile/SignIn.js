@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Avatar } from "@mui/material";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -8,15 +7,19 @@ import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import classes from "./Authentication.module.css";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { ROUTES_DATA } from "../../routes";
+import { uiActions } from "../../store/ui-slice";
+import { useDispatch } from "react-redux";
+import ErrorAlert from "../Badges/ErrorAlert";
+import { MESSAGES } from "../../text";
 
 export default function SignIn() {
   const { signin } = useAuth();
-  const [error, setError] = useState("");
 
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   async function handleSubmit(event) {
@@ -27,11 +30,11 @@ export default function SignIn() {
     const password = data.get("password");
 
     try {
-      setError("");
       await signin(email, password);
-      navigate("/profile");
+      navigate(ROUTES_DATA.AUTH.PROFILE.url);
     } catch {
-      setError("Failed to log in");
+      dispatch(uiActions.showNotification(MESSAGES.auth.signInFailed));
+      
     }
   }
 
@@ -73,8 +76,6 @@ export default function SignIn() {
             id="password"
             autoComplete="current-password"
           />
-
-          {error && <p className={classes["error__text"]}>{error}</p>}
           <Button
             type="submit"
             fullWidth
@@ -85,14 +86,19 @@ export default function SignIn() {
           </Button>
           <Grid container>
             <Grid item xs>
-              <Link to="/forgotpassword">Forgot password?</Link>
+              <Link to={ROUTES_DATA.AUTH.FORGOT_PASSWORD.url}>
+                Forgot password?
+              </Link>
             </Grid>
             <Grid item>
-              <Link to="/signup">{"Don't have an account? Sign Up"}</Link>
+              <Link to={ROUTES_DATA.AUTH.SIGN_UP.url}>
+                {"Don't have an account? Sign Up"}
+              </Link>
             </Grid>
           </Grid>
         </Box>
       </Box>
+      <ErrorAlert />
     </Container>
   );
 }
