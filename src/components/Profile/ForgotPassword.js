@@ -18,7 +18,6 @@ import { useDispatch } from "react-redux";
 import ErrorAlert from "../Badges/ErrorAlert";
 import { MESSAGES } from "../../text";
 
-
 export default function ForgotPassword() {
   const { resetPassword } = useAuth();
 
@@ -33,19 +32,14 @@ export default function ForgotPassword() {
     try {
       await resetPassword(email);
       setMessage(true);
-    } catch (error) {
-      const message = error.message;
-      if (message.includes("auth/user-not-found")) {
-        dispatch(
-          uiActions.showNotification(
-            MESSAGES.auth.emailNotFound
-          )
-        );
-        
-      } else {
-        dispatch(uiActions.showNotification(MESSAGES.auth.resetPasswordFailed));
-        
-      }
+    } catch ({ message }) {
+      dispatch(
+        uiActions.showNotification(
+          message.includes("auth/user-not-found")
+            ? MESSAGES.auth.emailNotFound
+            : MESSAGES.auth.resetPasswordFailed
+        )
+      );
     }
   }
 
@@ -76,9 +70,7 @@ export default function ForgotPassword() {
             name="email"
             autoComplete="email"
             autoFocus
-            helperText={
-              message ? MESSAGES.auth.checkInbox : ""
-            }
+            helperText={message && MESSAGES.auth.checkInbox}
           />
           <Button
             type="submit"

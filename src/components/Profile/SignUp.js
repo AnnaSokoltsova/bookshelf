@@ -12,7 +12,7 @@ import ErrorAlert from "../Badges/ErrorAlert";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
-import { isEmail, isValidPassword } from "../../validations";
+import { isValidEmail, isValidPassword } from "../../validations";
 import { ROUTES_DATA } from "../../routes";
 import { uiActions } from "../../store/ui-slice";
 import { useDispatch } from "react-redux";
@@ -29,26 +29,24 @@ export default function SignUp() {
 
   function handleEmailBlur(event) {
     const email = event.target.value;
-    setEmailError(!isEmail(email));
+    setEmailError(!isValidEmail(email));
   }
 
   function handlePasswordBlur(event) {
-    const password = event.target.value;
-    setPasswordError(!isValidPassword(password));
+    setPasswordError(!isValidPassword(event.target.value));
   }
 
   async function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
-    const fields = Object.fromEntries(formData.entries());
 
-    const email = fields.email;
-    const password = fields.password;
-    const passwordConfirm = fields.passwordConfirm;
+    const {
+      email = "",
+      password = "",
+      passwordConfirm = "",
+    } = Object.fromEntries(formData.entries());
 
-    if (emailError || passwordError || !email || !password) {
-      return;
-    }
+    if (emailError || passwordError || !email || !password) return;
 
     if (password !== passwordConfirm) {
       return setPasswordMatchingError(true);
@@ -57,14 +55,14 @@ export default function SignUp() {
     try {
       await signup(email, password);
       navigate(ROUTES_DATA.AUTH.PROFILE.url);
-    } catch (error) {
-      const message = error.message;
-
-      if (message.includes("auth/email-already-in-use")) {
-        dispatch(uiActions.showNotification(MESSAGES.auth.emaiAlreadylInUse));
-      } else {
-        dispatch(uiActions.showNotification(MESSAGES.auth.createAccountFailed));
-      }
+    } catch ({ message }) {
+      dispatch(
+        uiActions.showNotification(
+          message.includes("auth/email-already-in-use")
+            ? MESSAGES.auth.emaiAlreadylInUse
+            : MESSAGES.auth.createAccountFailed
+        )
+      );
     }
   }
 
@@ -97,7 +95,7 @@ export default function SignUp() {
             name="email"
             autoComplete="email"
             autoFocus
-            helperText={emailError ? MESSAGES.auth.enterValidEmail : ""}
+            helperText={emailError && MESSAGES.auth.enterValidEmail}
           />
           <TextField
             error={passwordError}
@@ -110,7 +108,7 @@ export default function SignUp() {
             type="password"
             id="password"
             autoComplete="current-password"
-            helperText={passwordError ? MESSAGES.auth.enterValidPassword : ""}
+            helperText={passwordError && MESSAGES.auth.enterValidPassword}
           />
           <TextField
             error={passwordMatchingError}
@@ -123,7 +121,7 @@ export default function SignUp() {
             id="passwordConfirm"
             autoComplete="current-password"
             helperText={
-              passwordMatchingError ? MESSAGES.auth.passwordsDoNotMatch : ""
+              passwordMatchingError && MESSAGES.auth.passwordsDoNotMatch
             }
           />
           <Button

@@ -8,21 +8,16 @@ import { useDispatch } from "react-redux";
 export default function ErrorAlert() {
   const [open, setOpen] = useState(false);
 
-  console.log("open " + open);
   const errorMessage = useSelector((state) => state.ui.message);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (errorMessage) {
-      setOpen(true);
-    }
+    if (errorMessage) setOpen(true);
   }, [errorMessage]);
 
   useEffect(() => {
-    if (!open) {
-      dispatch(uiActions.showNotification(""));
-    }
+    if (!open) dispatch(uiActions.showNotification(""));
   }, [open, dispatch]);
 
   return (
@@ -36,6 +31,7 @@ export default function ErrorAlert() {
             width: "100%",
             height: "100%",
             backgroundColor: "rgba(0, 0, 0, 0.5)",
+            zIndex: '2'
           }}
         >
           <Alert
@@ -45,15 +41,15 @@ export default function ErrorAlert() {
               top: "50%",
               left: "50%",
               transform: "translate(-50%, -50%)",
+              
             }}
             action={
               <IconButton
                 aria-label="close"
                 color="inherit"
                 size="small"
-                onClick={() => {
-                  setOpen(false);
-                }}
+                onClick={() => setOpen(false)
+                }
               >
                 <CloseIcon fontSize="inherit" />
               </IconButton>

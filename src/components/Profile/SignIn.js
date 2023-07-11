@@ -34,7 +34,6 @@ export default function SignIn() {
       navigate(ROUTES_DATA.AUTH.PROFILE.url);
     } catch {
       dispatch(uiActions.showNotification(MESSAGES.auth.signInFailed));
-      
     }
   }
 
