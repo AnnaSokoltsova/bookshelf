@@ -26,7 +26,7 @@ export const fetchBooksData = (searchedBook) => {
     dispatch(bookSearchActions.setSearchTitle(""));
     try {
       const { docs } = await fetchData();
-      console.log(docs);
+     
       if (docs) {
         const newBooks = docs
           .slice(0, 20)
@@ -50,7 +50,7 @@ export const fetchBooksData = (searchedBook) => {
         dispatch(bookSearchActions.showBookResults([]));
       }
     } catch (error) {
-      console.log(error);
+     
       dispatch(bookSearchActions.setSearchTitle(error.message));
       dispatch(bookSearchActions.changeLoadingStatus());
     }
@@ -114,7 +114,7 @@ export const fetchWorksData = (id) => {
       dispatch(bookpageActions.showPageData(bookData));
       dispatch(bookpageActions.changeLoadingStatus(false));
     } catch (error) {
-      console.log(error);
+      
       dispatch(bookpageActions.changeLoadingStatus(false));
     }
   };

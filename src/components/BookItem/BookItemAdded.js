@@ -13,7 +13,7 @@ export default function BookItemAdded({
   const replaceImageOnError = (event) => {
     event.currentTarget.src = missingCover;
   };
-  console.log(id);
+  
   return (
     <article className={classes["single-book"]}>
       <div className={classes["single-book__image"]}>

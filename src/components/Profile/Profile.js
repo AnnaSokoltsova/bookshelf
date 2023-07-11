@@ -21,11 +21,8 @@ export default function Profile() {
       navigate(ROUTES_DATA.AUTH.SIGN_IN.url);
     } catch {
       dispatch(uiActions.showNotification(MESSAGES.auth.logOutFailed));
-     
     }
   }
-
-  console.log(currentUser);
 
   return (
     <Container>

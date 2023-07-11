@@ -14,7 +14,7 @@ export default function ToReadButtons({ id }) {
   const userId = currentUser.uid;
 
   const handleRemove = () => {
-    console.log(id);
+    
     dispatch(bookshelfActions.removeFromBookShelf(id));
 
     dispatch(removeBook(id, userId));
