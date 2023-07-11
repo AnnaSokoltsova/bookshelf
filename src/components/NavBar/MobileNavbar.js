@@ -6,7 +6,6 @@ import {
   Toolbar,
   List,
   ListItemButton,
-  ListItemText,
   IconButton,
   Accordion,
   AccordionSummary,
