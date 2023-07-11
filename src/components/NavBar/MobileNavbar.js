@@ -19,6 +19,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { NavLink } from "react-router-dom";
 import bookshelf from "../../images/bookshelfsimple.png";
 import { useAuth } from "../../context/AuthContext";
+import { ROUTES_DATA } from "../../routes";
 
 
 function MobileNavbar() {
@@ -34,7 +35,7 @@ function MobileNavbar() {
   };
 
   const { currentUser } = useAuth();
-  const toValue = currentUser ? "/profile" : "/signin";
+  const toValue = currentUser ? ROUTES_DATA.AUTH.PROFILE.url : ROUTES_DATA.AUTH.SIGN_IN.url;
 
   const navLinkStyle = { display: "flex", width: "100%" }
 
@@ -108,7 +109,7 @@ function MobileNavbar() {
                   <AccordionDetails>
                     <ListItemButton>
                       <NavLink
-                        to="/bookshelf"
+                        to={ROUTES_DATA.BOOKSHELF.TO_READ.url}
                         end
                         className={({ isActive }) =>
                           isActive ? "link active" : "link"
@@ -122,7 +123,7 @@ function MobileNavbar() {
 
                     <ListItemButton>
                       <NavLink
-                        to="/bookshelf/inprogress"
+                        to={ROUTES_DATA.BOOKSHELF.IN_PROGRESS.url}
                         className={({ isActive }) =>
                           isActive ? "link active" : "link"
                         }
@@ -135,7 +136,7 @@ function MobileNavbar() {
 
                     <ListItemButton>
                       <NavLink
-                        to="/bookshelf/completed"
+                        to={ROUTES_DATA.BOOKSHELF.COMPLETED.url}
                         className={({ isActive }) =>
                           isActive ? "link active" : "link"
                         }

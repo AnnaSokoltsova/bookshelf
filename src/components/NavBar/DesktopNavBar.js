@@ -5,6 +5,7 @@ import { NavLink, Link } from "react-router-dom";
 import bookshelf from "../../images/bookshelfsimple.png";
 import { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
+import { ROUTES_DATA } from "../../routes";
 
 export default function DesktopNavBar() {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -21,7 +22,7 @@ export default function DesktopNavBar() {
     setAnchorEl(null);
   };
 
-  const toValue = currentUser ? "/profile" : "/signin";
+  const toValue = currentUser ? ROUTES_DATA.AUTH.PROFILE.url : ROUTES_DATA.AUTH.SIGN_IN.url;
 
   return (
     <Box>
@@ -73,7 +74,7 @@ export default function DesktopNavBar() {
           >
             <MenuItem onClick={handleClose}>
               <NavLink
-                to="/bookshelf/toread"
+                to={ROUTES_DATA.BOOKSHELF.TO_READ.url}
                 className={({ isActive }) =>
                   isActive ? "link active" : "link"
                 }
@@ -84,7 +85,7 @@ export default function DesktopNavBar() {
             <MenuItem onClick={handleClose}>
               {" "}
               <NavLink
-                to="/bookshelf/inprogress"
+                to={ROUTES_DATA.BOOKSHELF.IN_PROGRESS.url}
                 className={({ isActive }) =>
                   isActive ? "link active" : "link"
                 }
@@ -94,7 +95,7 @@ export default function DesktopNavBar() {
             </MenuItem>
             <MenuItem onClick={handleClose}>
               <NavLink
-                to="/bookshelf/completed"
+                to={ROUTES_DATA.BOOKSHELF.COMPLETED.url}
                 className={({ isActive }) =>
                   isActive ? "link active" : "link"
                 }

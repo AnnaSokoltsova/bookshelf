@@ -1,7 +1,15 @@
 import { bookshelfActions } from "./bookshelf-slice";
 import { uiActions } from "./ui-slice";
 import { db } from "../config/firebase";
-import { collection, doc, setDoc, getDocs, updateDoc, deleteDoc } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  setDoc,
+  getDocs,
+  updateDoc,
+  deleteDoc,
+} from "firebase/firestore";
+import { MESSAGES } from "../text";
 
 export const sendBookshelfData = (id, author, title, coverImg, userId) => {
   return (dispatch) => {
@@ -18,16 +26,12 @@ export const sendBookshelfData = (id, author, title, coverImg, userId) => {
           inProgressStatus: false,
           completedStatus: false,
         };
-        
+
         const userCollectionRef = collection(db, `${userId}`);
         const bookRef = doc(userCollectionRef, id);
         await setDoc(bookRef, addedBook);
-        
       } catch (error) {
-        dispatch(
-          uiActions.showNotification("Error when adding a book")
-        );
-        dispatch(uiActions.setNotificationFlag());
+        dispatch(uiActions.showNotification(MESSAGES.firestoreErrors.errorWhenAddingBook));
       }
     };
     sendBook();
@@ -40,14 +44,11 @@ export const fetchBookshelfData = (userId) => {
       try {
         const userCollectionRef = collection(db, `${userId}`);
         const data = await getDocs(userCollectionRef);
-        
-        const bookshelfData = data.docs.map((doc) => ({...doc.data()}))
+
+        const bookshelfData = data.docs.map((doc) => ({ ...doc.data() }));
         dispatch(bookshelfActions.replaceBookshelf(bookshelfData || []));
-      } catch (error) {        
-        dispatch(
-          uiActions.showNotification('Fetching bookshelf data failed!')
-        );
-        dispatch(uiActions.setNotificationFlag());
+      } catch (error) {
+        dispatch(uiActions.showNotification(MESSAGES.firestoreErrors.fetchDataFailed));
       }
     };
     getBooks();
@@ -61,18 +62,13 @@ export const updateBookStatus = (id, userId, bookStatuses) => {
         const userCollectionRef = collection(db, `${userId}`);
         const bookRef = doc(userCollectionRef, id);
         await updateDoc(bookRef, bookStatuses);
-        
       } catch (error) {
-       
-        dispatch(
-          uiActions.showNotification('Updating book status failed')
-        );
-        dispatch(uiActions.setNotificationFlag());
+        dispatch(uiActions.showNotification(MESSAGES.firestoreErrors.updateStatusFailed));
       }
     };
     updateBook();
   };
-}
+};
 
 export const removeBook = (id, userId) => {
   return (dispatch) => {
@@ -81,18 +77,13 @@ export const removeBook = (id, userId) => {
         const userCollectionRef = collection(db, `${userId}`);
         const bookRef = doc(userCollectionRef, id);
         await deleteDoc(bookRef);
-    
       } catch (error) {
-
-        dispatch(
-          uiActions.showNotification('Removing book failed')
-        );
-        dispatch(uiActions.setNotificationFlag());
+        dispatch(uiActions.showNotification(MESSAGES.firestoreErrors.removeBookFailed));
       }
     };
     deleteBook();
   };
-}
+};
 
 export const addComment = (id, userId, comments) => {
   return (dispatch) => {
@@ -101,16 +92,12 @@ export const addComment = (id, userId, comments) => {
         const userCollectionRef = collection(db, `${userId}`);
         const bookRef = doc(userCollectionRef, id);
         await updateDoc(bookRef, comments);
-        
       } catch (error) {
-       
         dispatch(
-          uiActions.showNotification('Adding or deleting comment failed')
-        ); 
-        dispatch(uiActions.setNotificationFlag());
-
+          uiActions.showNotification(MESSAGES.firestoreErrors.addOrDeleteCommentFailed)
+        );
       }
     };
     updateBook();
   };
-}
+};
