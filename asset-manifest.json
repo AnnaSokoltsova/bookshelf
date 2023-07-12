@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/bookshelf/static/css/main.581181f9.css",
-    "main.js": "/bookshelf/static/js/main.252d604f.js",
+    "main.js": "/bookshelf/static/js/main.ad0e5cac.js",
     "static/media/missingcover.png": "/bookshelf/static/media/missingcover.42f90d300eb362196595.png",
     "static/media/bookshelfsimple.png": "/bookshelf/static/media/bookshelfsimple.f1d5cce263100e5df17a.png",
     "index.html": "/bookshelf/index.html",
     "main.581181f9.css.map": "/bookshelf/static/css/main.581181f9.css.map",
-    "main.252d604f.js.map": "/bookshelf/static/js/main.252d604f.js.map"
+    "main.ad0e5cac.js.map": "/bookshelf/static/js/main.ad0e5cac.js.map"
   },
   "entrypoints": [
     "static/css/main.581181f9.css",
-    "static/js/main.252d604f.js"
+    "static/js/main.ad0e5cac.js"
   ]
 }
