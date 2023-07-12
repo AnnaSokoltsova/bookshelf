@@ -1,5 +1,4 @@
 import { useSelector } from "react-redux";
-import { useState, useEffect } from "react";
 import BookItem from "../../BookItem/BookItem";
 import BookResultButton from "../../BookItem/AddBookButton";
 import classes from "./BookResults.module.css";
@@ -11,10 +10,6 @@ export default function BookResults() {
   const bookResults = useSelector((state) => state.bookSearch.bookResults);
   const loadingStatus = useSelector((state) => state.bookSearch.isLoading);
   const searchTitle = useSelector((state) => state.bookSearch.searchTitle);
-  // const errorMessage = useSelector((state) => state.ui.message);
-
-  // console.log(errorMessage);
-  
 
   return (
     <div>

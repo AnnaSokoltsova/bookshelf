@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { bookSearchActions } from "../../../store/book-search-slice";
 import classes from "./SearchForm.module.css";
@@ -10,16 +10,13 @@ function SearchForm(props) {
   const [searchText, setSearchText] = useState("");
   const [searchInput, setSearchInput] = useState("");
   const dispatch = useDispatch();
-  
 
-  // useEffect(() => searchText.current.focus(), []);
   useEffect(() => {
     if (isMounted) {
       if (searchText !== "") {
         dispatch(fetchBooksData(searchText));
       }
     } else {
-      
       dispatch(fetchBooksData("The Hobbit"));
       isMounted = true;
     }
