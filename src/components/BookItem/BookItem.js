@@ -45,7 +45,7 @@ export default function BookItem({ id, author, title, coverImg }) {
   return (
     <article className={classes["single-book"]}>
       <div className={classes["single-book__image"]}>
-        <Link to={`/bookshelf/${id}`}>
+        <Link to={`/${id}`}>
           <img src={coverImg} alt="cover" onError={replaceImageOnError} />
         </Link>
       </div>
@@ -56,7 +56,7 @@ export default function BookItem({ id, author, title, coverImg }) {
           </div>
           <div className={classes["single-book__text"]}>
             <Link
-              to={`/bookshelf/${id}`}
+              to={`/${id}`}
               className={classes["single-book__link"]}
             >
               {title}

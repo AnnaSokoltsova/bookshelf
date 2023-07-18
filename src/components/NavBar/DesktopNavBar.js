@@ -27,7 +27,7 @@ export default function DesktopNavBar() {
   return (
     <Box>
       <Toolbar>
-        <Link to="/bookshelf">
+        <Link to="/">
           <Avatar
             alt="bookshelf"
             src={bookshelf}
@@ -42,7 +42,7 @@ export default function DesktopNavBar() {
         <Box sx={{ display: "flex", alignItems: "center", marginLeft: "auto" }}>
           <Button key={"search"}>
             <NavLink
-              to="/bookshelf"
+              to="/"
               className={({ isActive }) => (isActive ? "link active" : "link")}
             >
               Search
