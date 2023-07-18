@@ -10,7 +10,7 @@ export const fetchBooksData = (searchedBook) => {
   return async (dispatch) => {
     const fetchData = async () => {
       const response = await fetch(
-        `http://openlibrary.org/search.json?title=${searchedBook}`
+        `https://openlibrary.org/search.json?title=${searchedBook}`
       );
 
       if (!response.ok) {
