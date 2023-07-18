@@ -1,35 +1,35 @@
 export const ROUTES_DATA = {
   AUTH: {
     SIGN_UP: {
-      url: "/signup",
+      url: "/bookshelf/signup",
       path: "signup",
     },
     SIGN_IN: {
-      url: "/signin",
+      url: "/bookshelf/signin",
       path: "signin",
     },
     PROFILE: {
-      url: "/profile",
+      url: "/bookshelf/profile",
       path: "profile",
     },
     FORGOT_PASSWORD: {
-      url: "/forgotpassword",
+      url: "/bookshelf/forgotpassword",
       path: "forgotpassword",
     },
   },
   BOOKSHELF: {
-    url: "/bookshelf",
-    path: "bookshelf",
+    url: "/bookshelf/personalshelf",
+    path: "personalshelf",
     TO_READ: {
-      url: "/bookshelf/toread",
+      url: "/bookshelf/personalshelf/toread",
       path: "toread",
     },
     IN_PROGRESS: {
-      url: "/bookshelf/inprogress",
+      url: "/bookshelf/personalshelf/inprogress",
       path: "inprogress",
     },
     COMPLETED: {
-      url: "/bookshelf/completed",
+      url: "/bookshelf/personalshelf/completed",
       path: "completed",
     },
   },

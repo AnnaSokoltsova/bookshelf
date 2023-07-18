@@ -35,11 +35,11 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<SharedLayout />}>
+        <Route path="/bookshelf" element={<SharedLayout />}>
           <Route index element={<BookSearch />} />
           <Route path=":pageid" element={<BookPage />} />
           <Route
-            path="bookshelf"
+            path="personalshelf"
             element={
               <PrivateRoute>
                 <BookshelfLayout />

@@ -65,7 +65,7 @@ function MobileNavbar() {
             <List>
               <ListItemButton>
                 <NavLink
-                  to="/"
+                  to="/bookshelf"
                   className={({ isActive }) =>
                     isActive ? "link active" : "link"
                   }
