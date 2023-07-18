@@ -55,7 +55,10 @@ export default function BookItem({ id, author, title, coverImg }) {
             <span>{author}</span>
           </div>
           <div className={classes["single-book__text"]}>
-            <Link to={`/${id}`} className={classes["single-book__link"]}>
+            <Link
+              to={`/${id}`}
+              className={classes["single-book__link"]}
+            >
               {title}
             </Link>
           </div>

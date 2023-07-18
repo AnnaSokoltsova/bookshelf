@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 import {
   InProgress,
   Completed,
@@ -33,13 +33,13 @@ function App() {
   }, [currentUser, dispatch]);
 
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
         <Route path="/" element={<SharedLayout />}>
           <Route index element={<BookSearch />} />
           <Route path=":pageid" element={<BookPage />} />
           <Route
-            path="bookshelf"
+            path="personalshelf"
             element={
               <PrivateRoute>
                 <BookshelfLayout />
@@ -65,7 +65,7 @@ function App() {
           <Route path="forgotpassword" element={<ForgotPassword />} />
         </Route>
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 

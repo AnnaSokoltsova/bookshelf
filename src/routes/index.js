@@ -18,18 +18,18 @@ export const ROUTES_DATA = {
     },
   },
   BOOKSHELF: {
-    url: "/bookshelf",
-    path: "bookshelf",
+    url: "/personalshelf",
+    path: "personalshelf",
     TO_READ: {
-      url: "/bookshelf/toread",
+      url: "/personalshelf/toread",
       path: "toread",
     },
     IN_PROGRESS: {
-      url: "/bookshelf/inprogress",
+      url: "/personalshelf/inprogress",
       path: "inprogress",
     },
     COMPLETED: {
-      url: "/bookshelf/completed",
+      url: "/personalshelf/completed",
       path: "completed",
     },
   },
