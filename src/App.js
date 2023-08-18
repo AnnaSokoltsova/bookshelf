@@ -1,8 +1,5 @@
 import { HashRouter, Routes, Route } from "react-router-dom";
 import {
-  InProgress,
-  Completed,
-  ToRead,
   BookSearch,
   BookPage,
   SharedLayout,
@@ -15,6 +12,8 @@ import {
   Comments,
   ForgotPassword
 } from "./components";
+
+import BookshelfContainer from "./layout/BooksContainer/BookshelfContainer";
 
 import { useEffect } from "react";
 import { useAuth } from "./context/AuthContext";
@@ -46,9 +45,9 @@ function App() {
               </PrivateRoute>
             }
           >
-            <Route path="toread" element={<ToRead />} />
-            <Route path="inprogress" element={<InProgress />} />
-            <Route path="completed" element={<Completed />} />
+            <Route path="toread" element={<BookshelfContainer type='toRead' />} />
+            <Route path="inprogress" element={<BookshelfContainer type='inProgress' />} />
+            <Route path="completed" element={<BookshelfContainer type='completed' />} />
             <Route
               path=":pageid"
               element={

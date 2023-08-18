@@ -1,4 +1,4 @@
-import classes from "./BookItem.module.css";
+import classes from "./Buttons.module.css"
 
 export default function AddBookButton({ handleAddBook }) {
   return (
