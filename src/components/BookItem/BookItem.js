@@ -1,51 +1,27 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
-import { useAuth } from "../../context/AuthContext";
-import { useDispatch } from "react-redux";
-import { bookshelfActions } from "../../store/bookshelf-slice";
-import { useNavigate } from "react-router-dom";
-import { sendBookshelfData } from "../../store/bookshelf-actions";
-import missingCover from "../../images/missingcover.png";
 import { Bookmark } from "../Badges/Bookmark";
 import { ROUTES_DATA } from "../../routes";
-import AddBookButton from "./AddBookButton";
+
 import classes from "./BookItem.module.css";
 
-export default function BookItem({ id, author, title, coverImg }) {
-  const [bookAdded, setBookAdded] = useState(false);
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const { currentUser } = useAuth();
-
-  const replaceImageOnError = (event) => {
-    event.currentTarget.src = missingCover;
-  };
-
-  const handleAddBook = () => {
-    if (!currentUser) {
-      navigate(ROUTES_DATA.AUTH.SIGN_IN.url);
-      return;
-    }
-
-    dispatch(
-      bookshelfActions.addBookToShelf({
-        id,
-        author,
-        title,
-        coverImg,
-      })
-    );
-
-    setBookAdded(true);
-
-    const userId = currentUser.uid;
-    dispatch(sendBookshelfData(id, author, title, coverImg, userId));
-  };
-
+export default function BookItem({
+  id,
+  author,
+  title,
+  coverImg,
+  bookAdded,
+  type,
+  replaceImageOnError,
+  children,
+}) {
   return (
     <article className={classes["single-book"]}>
       <div className={classes["single-book__image"]}>
-        <Link to={`/${id}`}>
+        <Link
+          to={
+            type === "search" ? `/${id}` : `${ROUTES_DATA.BOOKSHELF.url}/${id}`
+          }
+        >
           <img src={coverImg} alt="cover" onError={replaceImageOnError} />
         </Link>
       </div>
@@ -56,22 +32,19 @@ export default function BookItem({ id, author, title, coverImg }) {
           </div>
           <div className={classes["single-book__text"]}>
             <Link
-              to={`/${id}`}
+              to={
+                type === "search"
+                  ? `/${id}`
+                  : `${ROUTES_DATA.BOOKSHELF.url}/${id}`
+              }
               className={classes["single-book__link"]}
             >
               {title}
             </Link>
           </div>
         </div>
-        {bookAdded && <Bookmark />}
-        <AddBookButton
-          author={author}
-          id={id}
-          bookshelf
-          title={title}
-          coverImg={coverImg}
-          handleAddBook={handleAddBook}
-        />
+        {type === "search" && bookAdded && <Bookmark />}
+        {children}
       </div>
     </article>
   );

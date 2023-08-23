@@ -1,7 +1,7 @@
 import React from "react";
 import About from "./About/About";
 import SearchForm from "./SearchForm/SearchForm";
-import BookResults from "./BookResults/BookResults";
+import BookSearchResults from "../../layout/BooksContainer/BookSearchResults";
 import Container from "../Container/Container";
 
 export default function BookSearch() {
@@ -9,7 +9,7 @@ export default function BookSearch() {
     <Container>
       <About />
       <SearchForm />
-      <BookResults />
+      <BookSearchResults type="search"/>
     </Container>
   );
 }
